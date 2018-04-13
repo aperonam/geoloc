@@ -37,13 +37,9 @@
         <span class="closeBtn">&times;</span>
       </div>
       <div class="modal-body">
-		<form action="/connect/facebook" method="POST">
-		<button type="submit" id="fcbButton"><img id="facebook" src="./assets/img/facebook.png" alt="Facebook" /></button>
-		</form>
-		<form action="/connect/google" method="POST">
-		<button type="submit" id="glgButton"><img id="google" src="./assets/img/google.png" alt="Google"/></button>
-		</form>
+      
 		<a href="signin" id="twtButton"><img id="twitter" src="./assets/img/twitter.png" alt="Twitter"/></a>
+		<p id="Condiciones">*Al iniciar sesión aceptas que la aplicación obtenga tu ubicación, así como tu email de registro de twitter. Estos datos se mantendrán almacenados de forma segura y nunca serán expuestos sin su consentimiento.</p>
       </div>
     </div>
   </div>

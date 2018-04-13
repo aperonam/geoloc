@@ -59,7 +59,7 @@ body{
     margin-left: -10px;
 }
 #twitter{
-    margin-top: -5px;
+    margin-top: 48px;
     margin-left: -11px;
 }
 #facebook{
@@ -73,22 +73,7 @@ body{
     margin-left: 137px;
     margin-top: 46px;
 }
-#fcbButton{
-	margin-left: 50px;
-    margin-bottom: 20px;
-    width: 382px;
-    height: 70px;
-    margin-top: 35px;
-    outline: none;
-}
-#glgButton{
-	margin-left: 50px;
-    margin-bottom: 10px;
-    width: 382px;
-    height: 70px;
-    margin-top: 35px;
-    outline: none;
-}
+
 #twtButton{
     margin-left: 50px;
     margin-bottom: 49px;
@@ -97,13 +82,16 @@ body{
     margin-top: 35px;	
     outline: none;
 }
-#fcbButton:hover {
-	 cursor:pointer;
-}
-#glgButton:hover {
-	 cursor:pointer;
 }#twtButton:hover {
 	 cursor:pointer;
+}
+#Condiciones{
+	text-align: left;
+    margin-bottom: 36px;
+    margin-top: 51px;
+    font-size: 11px;
+    font-weight: bold;
+    color: gray;
 }
 @keyframes modalopen{
   from{ opacity: 0}
