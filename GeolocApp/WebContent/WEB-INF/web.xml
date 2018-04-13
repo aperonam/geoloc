@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>GeolocApp</display-name>
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>signin</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.SigninServlet
+      </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>callback</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.CallbackServlet
+      </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>logout</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.LogoutServlet
+      </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>hello</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.Hello
+      </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>signin</servlet-name>
+    <url-pattern>/signin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>callback</servlet-name>
+    <url-pattern>/callback</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+</web-app>
