@@ -25,7 +25,7 @@
     <span class="linea2"></span>
     <span class="linea3"></span>
     <span class="linea4"></span>
-    <a id="modalBtn" class="button">INICIA SESI”N</a>
+    <a id="modalBtn" class="button">INICIA SESI√ìN</a>
   </div>
  </div>
 </section></div>
@@ -37,9 +37,8 @@
         <span class="closeBtn">&times;</span>
       </div>
       <div class="modal-body">
-      
 		<a href="signin" id="twtButton"><img id="twitter" src="./assets/img/twitter.png" alt="Twitter"/></a>
-		<p id="Condiciones">*Al iniciar sesiÛn aceptas que la aplicaciÛn obtenga tu ubicaciÛn, asÌ como tu email de registro de twitter. Estos datos se mantendr·n almacenados de forma segura y nunca ser·n expuestos sin su consentimiento.</p>
+		<p id="Condiciones">*Al iniciar sesi√≥n aceptas que la aplicaci√≥n obtenga tu ubicaci√≥n, as√≠ como tu email de registro de twitter. Estos datos se mantendr√°n almacenados de forma segura y nunca ser√°n expuestos sin su consentimiento.</p>
       </div>
     </div>
   </div>
@@ -59,7 +58,7 @@
     		<span class="linea2"></span>
     		<span class="linea3"></span>
     		<span class="linea4"></span>
-    		<a id="modalBtn2" class="button">REGÕSTRATE AHORA</a>
+    		<a id="modalBtn2" class="button">REG√çSTRATE AHORA</a>
   		</div>
  	</div>
 	</section>
@@ -95,7 +94,7 @@ function closeModal(){
   modal.style.display = 'none';
 }
 
-// 	Sale del modal si pulsas fuera de Èl
+// 	Sale del modal si pulsas fuera de √©l
 function outsideClick(e){
   if(e.target == modal){
     modal.style.display = 'none';
