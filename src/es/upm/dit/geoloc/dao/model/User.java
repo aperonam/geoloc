@@ -9,7 +9,6 @@ import javax.persistence.Id;
 @Entity
 public class User implements Serializable{
 
-	
 	@Id
 	private double id;
 	private String email;

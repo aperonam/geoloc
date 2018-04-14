@@ -2,14 +2,13 @@ package es.upm.dit.geoloc.dao.model;
 
 import java.io.Serializable;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Thought implements Serializable{
+public class Thought implements Serializable {
 
 	@Id
 	private double id;
@@ -19,7 +18,6 @@ public class Thought implements Serializable{
 	private String tag;
 	//private POINT location;
 	//private DATE createdAt;
-	
 	
 	
 	public Thought () {
