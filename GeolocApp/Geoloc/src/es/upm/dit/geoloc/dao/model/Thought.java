@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -12,6 +13,7 @@ public class Thought implements Serializable{
 
 	@Id
 	private double id;
+	@ManyToOne
 	private double userId;
 	private String text;
 	private String tag;
