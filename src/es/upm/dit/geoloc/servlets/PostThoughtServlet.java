@@ -16,18 +16,18 @@ import java.io.PrintWriter;
 public class PostThoughtServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Create Thought object
+		// Create Thought object
 		Thought thought = new Thought();
-        thought.setText(request.getParameter("text"));
-        thought.setTag(request.getParameter("tag"));
-        
-        // Make db Request
-        Integer thoughtId = ThoughtDAOImplementation.getInstance().createThought(thought);
-        
-        // Response configuration
-        response.setContentType("application/json");
-        response.setHeader("Cache-Control", "nocache");
-        	response.setCharacterEncoding("utf-8");
+		thought.setText(request.getParameter("text"));
+		thought.setTag(request.getParameter("tag"));
+		
+		// Make db Request
+		Integer thoughtId = ThoughtDAOImplementation.getInstance().createThought(thought);
+		
+		// Response configuration
+		response.setContentType("application/json");
+		response.setHeader("Cache-Control", "nocache");
+			response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 
 		// JSON Response
