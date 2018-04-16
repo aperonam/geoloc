@@ -13,8 +13,15 @@ import twitter4j.JSONObject;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class PostThoughtServlet extends HttpServlet {
+public class ThoughtServlet extends HttpServlet {
 	
+	
+	/*
+	 * Method used to create a new thought
+	 * @param request
+	 * @param response
+	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Create Thought object
 		Thought thought = new Thought();
@@ -22,12 +29,12 @@ public class PostThoughtServlet extends HttpServlet {
 		thought.setTag(request.getParameter("tag"));
 		
 		// Make db Request
-		Integer thoughtId = ThoughtDAOImplementation.getInstance().createThought(thought);
+		Integer thoughtId = 1;//ThoughtDAOImplementation.getInstance().createThought(thought);
 		
 		// Response configuration
 		response.setContentType("application/json");
 		response.setHeader("Cache-Control", "nocache");
-			response.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 
 		// JSON Response
@@ -42,5 +49,15 @@ public class PostThoughtServlet extends HttpServlet {
 		// String output		
 		out.print(jsonResponse.toString());
     }
+	
+	/*
+	 * Method used to delete a thought
+	 * @param request
+	 * @param response
+	 */
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO
+	}
 	
 }
