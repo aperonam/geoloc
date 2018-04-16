@@ -1,5 +1,8 @@
 package es.upm.dit.geoloc.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 
 import es.upm.dit.geoloc.dao.model.Thought;
@@ -45,6 +48,25 @@ public class ThoughtDAOImplementation implements ThoughtDAO{
 		            	session.close();
 		}
 		return thought;
+	}
+	public List<Thought> readThoughts() {
+		
+		List<Thought> myList = new ArrayList<>();	
+		Session session = SessionFactoryService.get().openSession();
+		try {
+		            	session.beginTransaction();
+		            	myList = session.createQuery("from Thought").list();		          
+		            	session.getTransaction().commit();
+		} catch (Exception e) {
+		            	// manejar excepciones
+		} finally {
+		            	session.close();
+		}
+		return myList;
+		
+		
+			
+		
 	}
 
 	@Override
