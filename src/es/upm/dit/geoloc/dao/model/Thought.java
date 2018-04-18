@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.vividsolutions.jts.geom.Point;
 
 @Entity
 public class Thought implements Serializable {
@@ -16,7 +17,7 @@ public class Thought implements Serializable {
 	private double userId;
 	private String text;
 	private String tag;
-	//private POINT location;
+	private Point location;
 	//private DATE createdAt;
 	
 	
@@ -64,6 +65,16 @@ public class Thought implements Serializable {
 
 	public void setUserId(double userId) {
 		this.userId = userId;
+	}
+
+
+	public Point getLocation() {
+		return location;
+	}
+
+
+	public void setLocation(Point location) {
+		this.location = location;
 	}
 
 }

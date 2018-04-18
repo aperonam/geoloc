@@ -25,10 +25,6 @@
     <url-pattern>/signin</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>hello</servlet-name>
-    <url-pattern>/hello</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>callback</servlet-name>
     <url-pattern>/callback</url-pattern>
   </servlet-mapping>
