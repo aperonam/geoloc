@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.clear {
+    clear: both;
+}
+
+body {
+    width: 100%;
+    font: normal bold 16px/normal tahoma;
+}
+
+article {
+    width: 943px;
+    height: 389px;
+    text-align: center;
+    background-color: #4AC8DA;
+    border-radius: 10px;
+    margin: 50px auto 20px;
+    padding: 5px;
+    overflow: hidden;
+    box-shadow: 3px 3px 10px #ccc;
+    margin-top: 46px;
+}
+
+article h3 {
+    padding: 10px;
+    color: #fff;
+}
+article .text-box {
+    padding: 5px;
+}
+
+article .text-box textarea {
+    width: 100%;
+    height: 279px;
+    font: normal 400 30px/normal cursive;
+    border-color: #4AC8DA;
+    box-shadow: inset 1px 1px 3px #000, inset -2px -2px 3px #000;
+    resize: none;
+    padding: 5px;
+}
+article .text-box textarea:focus {
+    outline: none;
+    border: 1px solid #5e9ec6;
+}
+
+
+.calc {
+    font-size: 14px;
+    float: left;
+    padding: 5px;
+}
+.calc span{
+    background-color: #fff;
+    padding: 2px;
+    font-weight: 500;
+    border-radius: 2px;
+    color: green;
+}
+.calc .red{
+    color: red;
+}
+.calc .orange{
+    color: orange;
+}
+.calc .green{
+    color: green;
+}

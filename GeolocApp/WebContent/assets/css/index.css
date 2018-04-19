@@ -1,0 +1,20 @@
+#CuerpoIndex{   
+    width: 78%;
+    float: right;
+}
+#map{
+	position: relative;
+    overflow: hidden;
+    width: 78%;
+    float: right;
+    height: 1100px;
+}
+#autocomplete{
+	margin-top: 10px;
+    margin-left: 200px;
+    width: 500px;
+    height: 38px;
+}
+#localiza{
+	width: 200px;
+}
