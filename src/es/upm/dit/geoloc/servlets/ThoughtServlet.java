@@ -55,6 +55,11 @@ public class ThoughtServlet extends HttpServlet {
 				thought.setLatitude(latitude);
 				double longitude = Double.parseDouble(jsonBody.getJSONObject("location").getString("longitude"));
 				thought.setLongitude(longitude);
+			} else {
+				PrintWriter out = response.getWriter();
+				response.setStatus(400);
+				out.print("Bad request");
+				return;
 			}
 			
 			// Make db Request
