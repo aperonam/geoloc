@@ -3,9 +3,11 @@ package es.upm.dit.geoloc.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
+import javax.persistence.Query;
 
+import org.hibernate.Session;
 import es.upm.dit.geoloc.dao.model.Thought;
+import es.upm.dit.geoloc.dao.model.User;
 
 
 
@@ -55,10 +57,18 @@ public class ThoughtDAOImplementation implements ThoughtDAO{
 		Session session = SessionFactoryService.get().openSession();
 		try {
 		            	session.beginTransaction();
-		            	session.saveOrUpdate(thought);
+		            	Query query = session.createQuery("update Thought set lat = :latitud, lng = :longitud where id = :id");
+		    query.setParameter("latitud",thought.getLat());
+		    query.setParameter("longitud",thought.getLng());
+		    query.setParameter("id", thought.getId() );
+		    
+		    int result = query.executeUpdate();
+		    
+		    System.out.println(result);
+		    
 		            	session.getTransaction().commit();
 		} catch (Exception e) {
-		            	// manejar excepciones
+		       System.out.println(e.getMessage());
 		} finally {
 		            	session.close();
 		}
@@ -80,7 +90,7 @@ public class ThoughtDAOImplementation implements ThoughtDAO{
 		
 	}
 	
-	
+	@Override
 	public List<Thought> getAll() {
 		Session session = SessionFactoryService.get().openSession();
 		List<Thought> ArrayThought = new ArrayList<Thought>();
@@ -93,6 +103,93 @@ public class ThoughtDAOImplementation implements ThoughtDAO{
         	// manejar excepciones
 } finally {
         	session.close();
+}
+		return ArrayThought;
+	}
+	
+	
+	@Override
+	public List<Thought> getPopular() {
+		Session session = SessionFactoryService.get().openSession();
+		List<Thought> ArrayThought = new ArrayList<Thought>();
+		try {
+        	session.beginTransaction();
+        	List<Thought> pensamientos = session.createQuery("select p from Thought p where likes >= :likes").setParameter("likes", 100).list();
+        	ArrayThought=pensamientos;
+        	session.getTransaction().commit();
+} catch (Exception e) {
+        	// manejar excepciones
+} finally {
+        	session.close();
+}
+		return ArrayThought;
+	}
+	
+	@Override
+	public List<Thought> getTags(String tag) {
+		Session session = SessionFactoryService.get().openSession();
+		List<Thought> ArrayThought = new ArrayList<Thought>();
+		try {
+        	session.beginTransaction();
+        	List<Thought> pensamientos = session.createQuery("select p from Thought p where tag1= :tag or tag2= :tag or tag3= :tag or tag4= :tag or tag5= :tag").setParameter("tag", tag).list();
+        	ArrayThought=pensamientos;
+        	session.getTransaction().commit();
+} catch (Exception e) {
+        	// manejar excepciones
+} finally {
+        	session.close();
+}
+		return ArrayThought;
+	}
+	
+	@Override
+	public List<Thought> getTagsPopulares(String tag) {
+		Session session = SessionFactoryService.get().openSession();
+		List<Thought> ArrayThought = new ArrayList<Thought>();
+		try {
+        	session.beginTransaction();
+        	List<Thought> pensamientos = session.createQuery("select p from Thought p where likes >= :likes and (tag1= :tag or tag2= :tag or tag3= :tag or tag4= :tag or tag5= :tag)").setParameter("tag", tag).setParameter("likes", 100).list();
+        	ArrayThought=pensamientos;
+        	session.getTransaction().commit();
+} catch (Exception e) {
+        	// manejar excepciones
+} finally {
+        	session.close();
+}
+		return ArrayThought;
+	}	
+	
+	@Override
+	public List<Thought> getTagsMisMarcadores(String tag, long UserId) {
+		Session session = SessionFactoryService.get().openSession();
+		List<Thought> ArrayThought = new ArrayList<Thought>();
+		try {
+        	session.beginTransaction();
+        	List<Thought> pensamientos = session.createQuery("select p from Thought p where UserId= :UserId and (tag1= :tag or tag2= :tag or tag3= :tag or tag4= :tag or tag5= :tag)").setParameter("tag", tag).setParameter("UserId",UserId ).list();
+        	ArrayThought=pensamientos;
+        	session.getTransaction().commit();
+} catch (Exception e) {
+        	// manejar excepciones
+} finally {
+        	session.close();
+}
+		return ArrayThought;
+	}	
+	
+	@Override
+	public List<Thought> getMisMarcadores(long UserId) {
+		Session session = SessionFactoryService.get().openSession();
+		List<Thought> ArrayThought = new ArrayList<Thought>();
+		try {
+        	session.beginTransaction();
+        	List<Thought> pensamientos = session.createQuery("select p from Thought p where UserId= :UserId").setParameter("UserId",UserId ).list();
+        	ArrayThought=pensamientos;
+        	session.getTransaction().commit();
+} catch (Exception e) {
+        	e.getMessage();
+} finally {
+
+	session.close();
 }
 		return ArrayThought;
 	}

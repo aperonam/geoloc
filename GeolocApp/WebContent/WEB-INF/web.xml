@@ -20,17 +20,53 @@
       </servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>update</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.UpdateMarkerServlet
+      </servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>publicar</servlet-name>
     <servlet-class>es.upm.dit.geoloc.servlets.ThoughtServlet
       </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>filtrar</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.FiltrarServlet
+      </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>filtrarPopulares</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.FiltrarPopularesServlet
+      </servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>filtrarMisMarcadores</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.FiltrarMisMarcadoresServlet
+  </servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>signin</servlet-name>
     <url-pattern>/signin</url-pattern>
   </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>filtrarMisMarcadores</servlet-name>
+    <url-pattern>/filtrarMisMarcadores</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>update</servlet-name>
+    <url-pattern>/update</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>publicar</servlet-name>
     <url-pattern>/publicar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>filtrar</servlet-name>
+    <url-pattern>/filtrar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>filtrarPopulares</servlet-name>
+    <url-pattern>/filtrarPopulares</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>callback</servlet-name>

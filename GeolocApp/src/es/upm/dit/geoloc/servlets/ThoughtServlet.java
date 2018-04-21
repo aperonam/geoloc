@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import es.upm.dit.geoloc.dao.model.Thought;
 
 import es.upm.dit.geoloc.dao.ThoughtDAOImplementation;
-import es.upm.dit.geoloc.dao.UserDAOImplementation;
-import es.upm.dit.geoloc.dao.model.Thought;
 
 import com.google.gson.Gson;
 
@@ -65,8 +63,6 @@ public class ThoughtServlet extends HttpServlet {
         
         
     	pensamiento.createThought(pensa);
-        
-        response.sendRedirect(request.getContextPath() + "/Index.jsp");
         
         return;
         

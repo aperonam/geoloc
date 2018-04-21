@@ -21,7 +21,6 @@ public class UserDAOImplementation implements UserDAO{
 		User usuario = (User) session.createQuery("select p from User p where p.UserID= :UserID")
 				.setParameter("UserID", user.getUserID())
 				.uniqueResult();
-		
 		if(usuario == null) {
 		            	session.save(user);
 		            	session.getTransaction().commit();
@@ -55,7 +54,8 @@ public class UserDAOImplementation implements UserDAO{
 		Session session = SessionFactoryService.get().openSession();
 		try {
 		            	session.beginTransaction();
-		            	session.saveOrUpdate(user);
+
+		            	
 		            	session.getTransaction().commit();
 		} catch (Exception e) {
 		            	// manejar excepciones

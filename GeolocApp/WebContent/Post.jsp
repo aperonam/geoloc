@@ -309,6 +309,7 @@ textArea.onblur = function () {
     	Json.pensamiento = x.value;
     	Json.lat = lat;
     	Json.lng = 	lng;
+    	Json.likes = 0;
 		Json.tag1 = tagsJson[0];
 		Json.tag2 = tagsJson[1];
 		Json.tag3 = tagsJson[2];

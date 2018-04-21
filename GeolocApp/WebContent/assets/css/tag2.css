@@ -1,0 +1,109 @@
+@import "breakpoint"
+@import "color-schemer"
+@import "bourbon@5.*"
+@import "neat@2.*"
+@import "modularscale@3.*"
+
+html, body, main{
+	height: 100%
+	
+}
+main{
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  margin-top: 161px;
+}
+
+#h1Tag{
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: #bbb;
+  margin-top: -140px;
+}
+  #Span2{
+    border: 2px solid #71ccd5;
+    padding: 3px 2px 3px 7px;
+    border-radius: 6px;
+    font-weight: 400;
+  }
+ p{
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #71ccd5;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+ }
+ #tag-input{
+  width: 553px;
+ }
+.tags-input {
+  outline: none;
+  border: 2px solid #71ccd5;
+  border-radius: 40px;
+  height: 40px;
+  padding: 0 11px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #888;
+}
+.tags-input2 {
+  outline: none;
+  border: 2px solid #71ccd5;
+  border-radius: 40px;
+  height: 40px;
+  padding: 0 11px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #888;
+}
+.tags-input span {
+  background: #bbb;
+  margin-right: 7px;
+  color: #fff;
+  padding: 4px 7px;
+  border-radius: 20px;
+}
+.tags-input span[data-selected] {
+  background: #71ccd5;
+}
+
+  .tag-input::after{
+    content: '';
+    background: #888;
+    width: 1px;
+    height: 19px;
+    margin: -1px 0 0 -1px;
+    display: none;
+    animation: blink 0.5s infinite alternate;
+    }
+form{
+
+   text-align: center;
+}
+
+@keyframes blink
+  0%
+    opacity: 1
+  49%
+    opacity: 1
+  50%
+    opacity: 0
+  100%
+    opacity: 0
+ 

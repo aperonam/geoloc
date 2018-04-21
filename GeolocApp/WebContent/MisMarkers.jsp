@@ -12,11 +12,11 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		response.sendRedirect("login.jsp");
 %>
 <%
+Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
+
 List<Thought> ArrayThought = new ArrayList<Thought>();
 ThoughtDAOImplementation thought = new ThoughtDAOImplementation();
-ArrayThought = thought.getAll();
-
-Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
+ArrayThought = thought.getMisMarcadores(twitter.getId());
 
 int longitudPensamientos = ArrayThought.size();
 %>
@@ -64,7 +64,7 @@ int longitudPensamientos = ArrayThought.size();
  			<p>Introduce el tag por el que quieres filtrar.</p>
  			<h1 id="h1Tag"><span id="Span2">Tags</span> Filtro</h1>
 		</main>
-		<form method="post" action="filtrar">
+		<form method="post" action="filtrarMisMarcadores">
  		<input id="tag-input" type="text" name="tag"/>
  	 	<button id="filtrar" type="submit"><img id="imgFiltrar" src="./assets/img/filtro.png" alt="Tag" /></button>
  	 	</form>

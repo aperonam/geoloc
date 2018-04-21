@@ -13,9 +13,6 @@ import javax.persistence.Table;
 @Table
 public class Thought implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -30,6 +27,7 @@ public class Thought implements Serializable {
 	private String tag5;
 	private double lat;
 	private double lng;
+	private int likes;
 	
 	
 	
@@ -129,6 +127,16 @@ public class Thought implements Serializable {
 
 	public void setTag5(String tag5) {
 		this.tag5 = tag5;
+	}
+
+
+	public int getLikes() {
+		return likes;
+	}
+
+
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 
 }

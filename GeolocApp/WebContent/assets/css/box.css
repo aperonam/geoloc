@@ -24,6 +24,7 @@ body{
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
   animation-name:modalopen;
   animation-duration:1s;
+  border-radius: 49px;
 }
 
 .modal-header h2, .modal-footer h3{
@@ -44,7 +45,8 @@ body{
 .closeBtn{
   color:#ccc;
   float: right;
-  margin-right:20px;
+  margin-top: 14px;
+  margin-right: 47px;
   font-size: 40px;
   color: #C3C3C6;
 }

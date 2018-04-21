@@ -5,16 +5,18 @@
 <%@page import = "java.util.List" %>
 <%@page import = "java.util.ArrayList" %>
 <%@page import = "twitter4j.Twitter" %>
+
 <%
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
 	if(session.getAttribute("twitter")==null)
 		response.sendRedirect("login.jsp");
 %>
+
 <%
 List<Thought> ArrayThought = new ArrayList<Thought>();
 ThoughtDAOImplementation thought = new ThoughtDAOImplementation();
-ArrayThought = thought.getAll();
+ArrayThought = (List<Thought>) session.getAttribute("lista");
 
 Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
 

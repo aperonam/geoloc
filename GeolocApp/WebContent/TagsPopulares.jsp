@@ -5,16 +5,18 @@
 <%@page import = "java.util.List" %>
 <%@page import = "java.util.ArrayList" %>
 <%@page import = "twitter4j.Twitter" %>
+
 <%
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
 	if(session.getAttribute("twitter")==null)
 		response.sendRedirect("login.jsp");
 %>
+
 <%
 List<Thought> ArrayThought = new ArrayList<Thought>();
 ThoughtDAOImplementation thought = new ThoughtDAOImplementation();
-ArrayThought = thought.getAll();
+ArrayThought = (List<Thought>) session.getAttribute("lista");
 
 Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
 
@@ -64,7 +66,7 @@ int longitudPensamientos = ArrayThought.size();
  			<p>Introduce el tag por el que quieres filtrar.</p>
  			<h1 id="h1Tag"><span id="Span2">Tags</span> Filtro</h1>
 		</main>
-		<form method="post" action="filtrar">
+		<form method="post" action="filtrarPopulares">
  		<input id="tag-input" type="text" name="tag"/>
  	 	<button id="filtrar" type="submit"><img id="imgFiltrar" src="./assets/img/filtro.png" alt="Tag" /></button>
  	 	</form>
@@ -83,17 +85,9 @@ int longitudPensamientos = ArrayThought.size();
     				<%for(int i= 0; i<longitudPensamientos; i++){%>
     				<li><div id="ContenidoPen">
     					<h3>Pensamiento #<%=ArrayThought.get(i).getId() %>
-    					
-    					<%if(ArrayThought.get(i).getLikes() <10){%>
-    					<img src='./assets/img/marker.png' alt="likes"/>		
-    					<%}else if(ArrayThought.get(i).getLikes() >=10 && ArrayThought.get(i).getLikes()<100 ){%>
-   						<img src='./assets/img/Marker10logo.png' alt="likes"/>
-   						<%}else if (ArrayThought.get(i).getLikes() >=100 ){%>
-    					<img src='./assets/img/marker50logo.png' alt="likes"/>	
-    					<%} else {%>
-    					<img src='./assets/img/marker.png' alt="likes"/>
-    					<%}%>
-    				  					
+
+    					<img src='./assets/img/marker50logo.png' alt="likes"/>
+   				  					
     					 </h3>
     					<p><%=ArrayThought.get(i).getPensamiento() %></p>
     					<div id="like">
@@ -172,17 +166,7 @@ int longitudPensamientos = ArrayThought.size();
         '</div>' +
       '</div>';
         var likes = "<%=likes%>"
-        
-            <%if(likes <10){%>
-    		logo = './assets/img/marker.png';
-    	<%}else if(likes >=10 && likes<100 ){%>
-   			logo = './assets/img/Marker10logo.png';
-   		<%}else if (likes >=100 ){%>
-    		logo = './assets/img/marker50logo.png';
-    	<%} else {%>
-    		logo = './assets/img/marker.png';
-    	<%}%>
-        
+       
         console.log("id = "+index);
         var infowindow = new google.maps.InfoWindow({
             maxWidth: 310

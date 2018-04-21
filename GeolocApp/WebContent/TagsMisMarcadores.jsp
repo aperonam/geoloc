@@ -14,7 +14,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 <%
 List<Thought> ArrayThought = new ArrayList<Thought>();
 ThoughtDAOImplementation thought = new ThoughtDAOImplementation();
-ArrayThought = thought.getAll();
+ArrayThought = (List<Thought>) session.getAttribute("lista");
 
 Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
 
