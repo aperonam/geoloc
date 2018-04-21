@@ -47,6 +47,14 @@ public class ThoughtServlet extends HttpServlet {
 			// Create Thought object
 			Thought thought = new Thought();
 			thought.setUserId(twitter.getId());
+			
+			if (jsonBody.getString("text") == null) {
+				PrintWriter out = response.getWriter();
+				response.setStatus(400);
+				out.print("Bad request");
+				return;
+			}
+			
 			thought.setText(jsonBody.getString("text"));
 			thought.setTag(jsonBody.getString("tag"));
 			
