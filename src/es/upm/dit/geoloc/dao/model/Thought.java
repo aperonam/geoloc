@@ -12,13 +12,14 @@ import com.vividsolutions.jts.geom.Point;
 public class Thought implements Serializable {
 
 	@Id
-	private double id;
+	private Integer id;
 	@ManyToOne
 	private double userId;
 	private String text;
 	private String tag;
-	private Point location;
-	//private DATE createdAt;
+	private double latitude;
+	private double longitude;
+	// private DATE createdAt;
 	
 	
 	public Thought () {
@@ -30,7 +31,7 @@ public class Thought implements Serializable {
 		return id;
 	}
 	
-	public void setId(double id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -68,13 +69,23 @@ public class Thought implements Serializable {
 	}
 
 
-	public Point getLocation() {
-		return location;
+	public double getLatitude() {
+		return latitude;
 	}
 
 
-	public void setLocation(Point location) {
-		this.location = location;
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
 }
