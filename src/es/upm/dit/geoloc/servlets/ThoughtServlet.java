@@ -98,6 +98,13 @@ public class ThoughtServlet extends HttpServlet {
 		// Get Twitter session
 		Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");
 		
+		if (twitter == null) {
+			PrintWriter out = resp.getWriter();
+			resp.setStatus(401);
+			out.print("Not Authorized");
+			return;
+		}
+		
 		Integer thoughtId = Integer.parseInt(req.getParameter("id"));
 		
 		Thought thought = ThoughtDAOImplementation.getInstance().readThought(thoughtId);
