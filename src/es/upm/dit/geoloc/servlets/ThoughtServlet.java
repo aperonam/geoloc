@@ -109,6 +109,13 @@ public class ThoughtServlet extends HttpServlet {
 		
 		Thought thought = ThoughtDAOImplementation.getInstance().readThought(thoughtId);
 		
+		if (thought == null) {
+			PrintWriter out = resp.getWriter();
+			resp.setStatus(404);
+			out.print("Thought with id=" + thoughtId + " does not exist");
+			return;
+		}
+		
 		// Response configuration
 		resp.setContentType("application/json");
 		resp.setHeader("Cache-Control", "nocache");
