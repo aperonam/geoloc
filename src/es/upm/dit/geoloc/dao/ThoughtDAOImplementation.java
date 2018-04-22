@@ -1,78 +1,81 @@
 package es.upm.dit.geoloc.dao;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.SessionFactory;
 
 import es.upm.dit.geoloc.dao.model.Thought;
 
 
-
-
-public class ThoughtDAOImplementation implements ThoughtDAO{
+public class ThoughtDAOImplementation implements ThoughtDAO {
 
 	private static ThoughtDAOImplementation instance;
 	private ThoughtDAOImplementation() {};
 	public static ThoughtDAOImplementation getInstance() {
-		if(null == instance) instance = new ThoughtDAOImplementation();
+		if (null == instance) instance = new ThoughtDAOImplementation();
 		return instance;
 	}
 
-	@Override
-	public void createThought(Thought thought) {
+	
+	public Integer createThought(Thought thought) {
 		Session session = SessionFactoryService.get().openSession();
-		try {
-		            	session.beginTransaction();
-		            	session.save(thought);
-		            	session.getTransaction().commit();
-		} catch (Exception e) {
-		            	// manejar excepciones
-		} finally {
-		            	session.close();
-		}
+		Integer thoughtId = null;
 		
+		try {
+			session.beginTransaction();
+			thoughtId = (Integer) session.save(thought);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: Manage Exceptions
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return thoughtId;
 	}
 
-	@Override
+	
 	public Thought readThought(double id) {
 		Thought thought = null;
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	thought = session.get(Thought.class, id);
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			thought = session.get(Thought.class, id);
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		            	// manejar excepciones
+			// TODO: Manage Exceptions
 		} finally {
-		            	session.close();
+			session.close();
 		}
 		return thought;
 	}
 
-	@Override
+	
 	public void updateThought(Thought thought) {
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	session.saveOrUpdate(thought);
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			session.saveOrUpdate(thought);
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		            	// manejar excepciones
+			// TODO: Manage Exceptions
 		} finally {
-		            	session.close();
+			session.close();
 		}
 		
 	}
 
-	@Override
+	
 	public void deleteThought(Thought thought) {
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	session.delete(thought);
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			session.delete(thought);
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		            	// manejar excepciones
+			// TODO: Manage Exceptions
 		} finally {
-		            	session.close();
+			session.close();
 		}
 		
 	}
