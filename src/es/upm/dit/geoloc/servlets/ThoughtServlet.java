@@ -1,6 +1,8 @@
 package es.upm.dit.geoloc.servlets;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.stream.Collectors;
 
+@WebServlet("/api/thought")
 public class ThoughtServlet extends HttpServlet {
 	
 	
@@ -95,6 +98,66 @@ public class ThoughtServlet extends HttpServlet {
 			out.print(jsonResponse.toString());
 			
 		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/*
+	 * Method that manages the "Upload Thought" request
+	 * @param request
+	 * @param response
+	 */
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// Get Twitter session
+		Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");
+		
+		if (twitter == null) {
+			PrintWriter out = resp.getWriter();
+			resp.setStatus(401);
+			out.print("Not Authorized");
+			return;
+		}
+		
+		Integer thoughtId = Integer.parseInt(req.getParameter("id"));
+		
+		Thought thought = ThoughtDAOImplementation.getInstance().readThought(thoughtId);
+		
+		if (thought == null) {
+			PrintWriter out = resp.getWriter();
+			resp.setStatus(404);
+			out.print("Thought with id=" + thoughtId + " does not exist");
+			return;
+		}
+		
+		// Response configuration
+		resp.setContentType("application/json");
+		resp.setHeader("Cache-Control", "nocache");
+		resp.setCharacterEncoding("utf-8");
+		PrintWriter out = resp.getWriter();
+		
+		try {
+			if (thought.getUserId() == twitter.getId()) {
+				String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+				
+				JSONObject jsonBody = new JSONObject(body);
+				
+				thought.setLatitude(Double.parseDouble(jsonBody.getJSONObject("location").getString("latitude")));
+				thought.setLongitude(Double.parseDouble(jsonBody.getJSONObject("location").getString("longitude")));
+				
+				// Update thought in db
+				ThoughtDAOImplementation.getInstance().updateThought(thought);;
+				
+				resp.setStatus(200);
+				out.print("{ status: \"200\" }");
+			} else {
+				resp.setStatus(401);
+				out.print("{ status: \"401\" }");
+			}
+		} catch (IllegalStateException | TwitterException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();

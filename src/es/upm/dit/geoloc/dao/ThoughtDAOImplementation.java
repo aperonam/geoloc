@@ -1,5 +1,8 @@
 package es.upm.dit.geoloc.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
@@ -48,6 +51,21 @@ public class ThoughtDAOImplementation implements ThoughtDAO {
 			session.close();
 		}
 		return thought;
+	}
+	
+	public List<Thought> readThoughtsNear(double latitude, double longitude) {
+		List<Thought> thoughts = null;
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			thoughts = session.createQuery("SELECT text, tag, latitude, longitude FROM Thought;").list();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: Manage Exceptions
+		} finally {
+			session.close();
+		}
+		return thoughts;
 	}
 
 	

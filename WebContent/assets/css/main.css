@@ -1,0 +1,119 @@
+/* main.css */
+
+body {
+	font-family: AvenirNext-Regular;
+}
+
+/* Login */
+
+#logo {
+	width: 333px;
+	background-size: 333px 137px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 170px;
+	display: block;
+}
+
+#log-in-button {
+	display: block;
+	margin-top: 52px;
+}
+
+#log-in-button img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Left container */
+
+#left-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 340px;
+	background-color: white;
+	border-right: 1px solid #EDEDED;
+	padding: 49px 53px;
+	overflow: scroll;
+}
+
+#title {
+	font-family: AvenirNext-DemiBold;
+	font-size: 37px;
+	color: #343434;
+	margin: 0;
+}
+
+.section-title {
+	font-family: AvenirNext-Medium;
+	font-size: 24px;
+	color: #000000;
+	margin: 0;
+	margin-top: 20;
+}
+
+#thoughts-container {
+
+}
+
+.thought {
+	margin: 0;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.thought.thought-text {
+	font-family: AvenirNext-Regular;
+	font-size: 17px;
+	color: #000000;
+	margin: 0;
+}
+
+.thought.thought-tag {
+	font-family: AvenirNext-Regular;
+	font-size: 17px;
+	color: #A2A2A2;
+	margin: 0;
+}
+
+/* Map */
+
+#map {
+	position: absolute;
+	top: 0;
+	left: 340px;
+	right: 0;
+	bottom: 0;
+}
+
+/* Post view */
+
+#share-container {
+	position: fixed;
+	width: 439px;
+	height: 247px;
+	background: #FFFFFF;
+	box-shadow: 0 2px 41px 8px rgba(0,0,0,0.08);
+	border-radius: 4px;
+}
+
+#share-text {
+	border: none;
+	background-color: transparent;
+	color: black;
+	font-family: AvenirNext-Regular;
+}
+
+#share-tag {
+	border: none;
+	background-color: #F0F0F0;
+	border-radius: 8px;
+}
+
+#share-button {
+
+}
+

@@ -12,7 +12,7 @@ import com.vividsolutions.jts.geom.Point;
 public class Thought implements Serializable {
 
 	@Id
-	private Integer id;
+	private int id;
 	@ManyToOne
 	private double userId;
 	private String text;
@@ -27,11 +27,11 @@ public class Thought implements Serializable {
 	}
 
 
-	public double getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

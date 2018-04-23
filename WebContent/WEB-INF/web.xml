@@ -5,6 +5,10 @@
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
+    <servlet-name>home</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.HomeServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>signin</servlet-name>
     <servlet-class>es.upm.dit.geoloc.servlets.SigninServlet</servlet-class>
   </servlet>
@@ -17,7 +21,7 @@
     <servlet-class>es.upm.dit.geoloc.servlets.LogoutServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>ThoughtServlet</servlet-name>
+    <servlet-name>thought</servlet-name>
     <servlet-class>es.upm.dit.geoloc.servlets.ThoughtServlet</servlet-class>
   </servlet>
   <servlet-mapping>
@@ -33,7 +37,11 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ThoughtServlet</servlet-name>
-    <url-pattern>/thought</url-pattern>
+    <servlet-name>home</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>thought</servlet-name>
+    <url-pattern>/api/thought</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -10,23 +10,12 @@ import javax.persistence.Id;
 public class User implements Serializable{
 
 	@Id
-	private double id;
-	private String email;
+	private int id;
 	//private DATE createdAt;
 	
 	
 	public User() {		
 		
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	
 	public double getId() {
@@ -34,7 +23,7 @@ public class User implements Serializable{
 	}
 
 
-	public void setId(double id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

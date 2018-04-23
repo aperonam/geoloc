@@ -18,13 +18,13 @@ public class UserDAOImplementation implements UserDAO{
 	public void createUser(User user) {
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	session.save(user);
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			session.save(user);
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		            	// manejar excepciones
+			// manejar excepciones
 		} finally {
-		            	session.close();
+			session.close();
 		}
 		
 	}
@@ -34,13 +34,13 @@ public class UserDAOImplementation implements UserDAO{
 		User user = null;
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	user = session.get(User.class, id);
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			user = session.get(User.class, id);
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		            	// manejar excepciones
+			// manejar excepciones
 		} finally {
-		            	session.close();
+			session.close();
 		}
 		return user;
 	}
@@ -49,13 +49,13 @@ public class UserDAOImplementation implements UserDAO{
 	public void updateUser(User user) {
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	session.saveOrUpdate(user);
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			session.saveOrUpdate(user);
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		            	// manejar excepciones
+			// manejar excepciones
 		} finally {
-		            	session.close();
+			session.close();
 		}
 		
 	}
@@ -64,13 +64,13 @@ public class UserDAOImplementation implements UserDAO{
 	public void deleteUser(User user) {
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	session.delete(user);
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			session.delete(user);
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		            	// manejar excepciones
+			// manejar excepciones
 		} finally {
-		            	session.close();
+			session.close();
 		}
 		
 	}
