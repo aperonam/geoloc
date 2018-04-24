@@ -1,0 +1,77 @@
+.cabecera{
+	height: 163px;
+	border: 1px solid #E5E5E8;
+}
+#logoCab{
+	height: 93px;
+    width: 186px;
+    margin-left: 74px;
+    margin-bottom: 50px;
+}
+#busca{
+    height: 150px;
+    width: 230px;
+    margin: 0px;
+}
+#publica{
+	height: 147px;
+    width: 267px;
+    margin-bottom: 0px;
+}
+#chatea{
+    height: 146px;
+    width: 271px;
+    margin-top: 11px;
+}
+#divlogo{
+    position: absolute;
+    float: left;
+    margin-top: 36px;
+}
+#divbusca{
+    position: absolute;
+    float: left;
+    margin-left: 495px;
+    margin-top: 8px;
+}
+#divpublica{
+    position: absolute;
+    margin-left: 1016px;
+    float: left;
+    margin-top: 10px;	
+}
+#divchatea{
+	position: absolute;
+    float: left;
+    margin-left: 1584px;
+}
+#divlogin{
+	float: left;
+    margin-left: 2037px;	
+}
+#logoIni{
+	height: 1103px;
+    width: 1103px;
+    margin-left: 82px;
+}
+#Logoinicio{
+	float: left;
+    width: 25%;
+}
+#logoMensaje{
+    position: absolute;
+    margin-left: 969px;
+}
+#logoMen{
+	height: 1007px;
+    width: 1112px;
+    margin-left: 365px;
+}
+#Registrate{
+    position: absolute;
+    margin-left: 1565px;
+    margin-top: 679px;
+}
+#bloque{
+	position: relative;
+}
