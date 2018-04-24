@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import = "es.upm.dit.geoloc.dao.model.Thought" %>
-<%@ page import = "java.util.List" %>
-<%@ page import = "java.util.ArrayList" %>
-<%@ page import = "twitter4j.Twitter" %>
 
 <!DOCTYPE html>
 <html>

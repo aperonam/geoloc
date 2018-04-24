@@ -24,6 +24,8 @@ body {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	width: 146px;
+	background-size: 33px 146px;
 }
 
 /* Left container */
@@ -33,26 +35,29 @@ body {
 	top: 0;
 	left: 0;
 	bottom: 0;
-	width: 340px;
+	width: 380px;
 	background-color: white;
 	border-right: 1px solid #EDEDED;
-	padding: 49px 53px;
 	overflow: scroll;
+}
+
+#left-container-content {
+	padding: 53px 41px;
 }
 
 #title {
 	font-family: AvenirNext-DemiBold;
-	font-size: 37px;
+	font-size: 27px;
 	color: #343434;
 	margin: 0;
 }
 
 .section-title {
 	font-family: AvenirNext-Medium;
-	font-size: 24px;
+	font-size: 18px;
 	color: #000000;
 	margin: 0;
-	margin-top: 20;
+	margin-top: 20px;
 }
 
 #thoughts-container {
@@ -84,7 +89,7 @@ body {
 #map {
 	position: absolute;
 	top: 0;
-	left: 340px;
+	left: 380px;
 	right: 0;
 	bottom: 0;
 }

@@ -15,7 +15,6 @@ import es.upm.dit.geoloc.dao.model.User;
 
 import java.io.IOException;
 
-@WebServlet("/callback")
 public class CallbackServlet extends HttpServlet {
 
 	/*

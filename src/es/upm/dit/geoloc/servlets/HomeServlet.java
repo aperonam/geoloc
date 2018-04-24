@@ -15,7 +15,7 @@ import es.upm.dit.geoloc.dao.ThoughtDAOImplementation;
 import es.upm.dit.geoloc.dao.model.Thought;
 import twitter4j.Twitter;
 
-@WebServlet("/")
+
 public class HomeServlet extends HttpServlet {
 
 	/*
