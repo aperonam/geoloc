@@ -13,8 +13,13 @@
 		<link rel="stylesheet" type="text/css" href="./assets/css/main.css">
 		<script src="./assets/js/request.js"></script>
 	</head>
-	<body>
+	<body style="text-align: center">
  		<img id="logo" alt="logo" src="./assets/img/logo2.png">
  		<a id="log-in-button" href="signin"><img alt="twitter log in button" src="./assets/img/twitter@2x.png"></a>
+ 		<p id="info">El uso implica la aceptación de las condiciones de servicio</p>
+ 		<div id="recurses"><img alt="loc-icon" src="./assets/img/loc-icon.png"><p>Geoloc utiliza tu localización</p></div>
+ 		<footer>
+ 			<a>Leer terminos de uso</a>
+ 		</footer>
 	</body>
 </html>

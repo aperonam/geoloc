@@ -7,10 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
-
 import es.upm.dit.geoloc.dao.ThoughtDAOImplementation;
 import es.upm.dit.geoloc.dao.model.Thought;
+import es.upm.dit.geoloc.dao.model.User;
 import twitter4j.JSONException;
 import twitter4j.JSONObject;
 import twitter4j.Twitter;
@@ -48,7 +47,9 @@ public class ThoughtServlet extends HttpServlet {
 			
 			// Create Thought object
 			Thought thought = new Thought();
-			thought.setUserId(twitter.getId());
+			User user = new User();
+			user.setId((int) twitter.getId());
+			thought.setUser(user);
 			
 			if (jsonBody.getString("text") == null) {
 				PrintWriter out = response.getWriter();
@@ -60,7 +61,7 @@ public class ThoughtServlet extends HttpServlet {
 			thought.setText(jsonBody.getString("text"));
 			thought.setTag(jsonBody.getString("tag"));
 			
-			if (request.getParameter("latitude") != null && request.getParameter("longitude") != null) {
+			if (jsonBody.getJSONObject("location").getString("latitude") != null && jsonBody.getJSONObject("location").getString("longitude") != null) {
 				double latitude = Double.parseDouble(jsonBody.getJSONObject("location").getString("latitude"));
 				thought.setLatitude(latitude);
 				double longitude = Double.parseDouble(jsonBody.getJSONObject("location").getString("longitude"));
@@ -138,7 +139,7 @@ public class ThoughtServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		
 		try {
-			if (thought.getUserId() == twitter.getId()) {
+			if (thought.getUser().getId() == twitter.getId()) {
 				String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 				
 				JSONObject jsonBody = new JSONObject(body);
@@ -198,7 +199,7 @@ public class ThoughtServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		
 		try {
-			if (thought.getUserId() == twitter.getId()) {
+			if (thought.getUser().getId() == twitter.getId()) {
 				// Delete thought from db
 				ThoughtDAOImplementation.getInstance().deleteThought(thought);;
 				

@@ -6,15 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.vividsolutions.jts.geom.Point;
-
 @Entity
 public class Thought implements Serializable {
 
 	@Id
 	private int id;
 	@ManyToOne
-	private double userId;
+	private User user;
 	private String text;
 	private String tag;
 	private double latitude;
@@ -59,13 +57,13 @@ public class Thought implements Serializable {
 	}
 
 
-	public double getUserId() {
-		return userId;
+	public User getUser() {
+		return this.user;
 	}
 
 
-	public void setUserId(double userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 

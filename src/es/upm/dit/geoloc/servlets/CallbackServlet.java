@@ -26,6 +26,11 @@ public class CallbackServlet extends HttpServlet {
     		// Get twitter session
 		Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
 		
+		if (twitter == null) {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			return;
+		}
+		
 		// Verify
 		RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
 		String verifier = request.getParameter("oauth_verifier");
@@ -34,14 +39,15 @@ public class CallbackServlet extends HttpServlet {
 			twitter.getOAuthAccessToken(requestToken, verifier);
 			request.getSession().removeAttribute("requestToken");
 		} catch (TwitterException e) {
-			throw new ServletException(e);
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			return;
 		}
 		
 		try {
-			User user = UserDAOImplementation.getInstance().readUser(twitter.getId());
+			User user = UserDAOImplementation.getInstance().readUser((int) twitter.getId());
 			
 			// Check if user exist
-			if (user == null) {
+			if (user != null) {
 				response.sendRedirect(request.getContextPath() + "/Index.jsp");
 				return;
 			}

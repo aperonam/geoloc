@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div>
-	<textarea id="share-text" rows="4" cols="20" placeholder="Share something..."></textarea>
-	<input id="share-tag" type="text" placeholder="Add tag" />
-	<button id="share-button" onclick="shareThought()">SHARE</button>
+<div id="share-container">
+	<textarea id="share-text" placeholder="Share something..."></textarea>
+	<input id="share-tag" type="text" placeholder="Add tag..." />
+	<button id="share-button" onclick="shareThought()"><img alt="share-icon" src="./assets/img/plane-icon.png"></button>
 </div>
 <script>
 	function shareThought() {
@@ -12,8 +12,8 @@
 		var tag = document.getElementById("share-tag").value;
 		if (tag == '') { tag = undefined; }
 		
-		var latitude = null;
-		var longitude = null;
+		var latitude = 40.458848;
+		var longitude = -3.688259;
 		
 		// Get user location
 		if (navigator.geolocation) {
@@ -26,9 +26,10 @@
 		}
 		
 		// Make request
-		var thought = postThought(text, tag, latitude, longitude);
+		postThought(text, tag, latitude, longitude);
 		
-		// Reload page
-		location.reload();
+		// Clean values
+		document.getElementById("share-text").value = '';
+		document.getElementById("share-tag").value = ''
 	}
 </script>

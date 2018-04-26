@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -14,49 +16,81 @@
 		<script src="./assets/js/request.js"></script>
 	</head>
 	<body>
- 		<%@ include file = "NavBar.jsp" %>
- 		<div id="map"></div>
- 		<%@ include file = "Post.jsp" %>
- 		<script>
- 			function initMap() {
- 				var mapProp = {
- 					center: new google.maps.LatLng(-33.8688, 151.2195),
- 					zoom: 15
- 				};
- 				
- 				var map = new google.maps.Map(document.getElementById("map"), mapProp);
- 				
- 				// User location
- 				if (navigator.geolocation) {
+		<div id="map"></div>
+		<%@ include file = "NavBar.jsp" %>
+		<script>
+			function initMap() {
+				var mapProp = {
+					center: new google.maps.LatLng(-33.8688, 151.2195),
+					zoom: 15,
+					// Map style
+					styles: [{
+						"featureType": "landscape.man_made",
+						"elementType": "geometry.fill",
+						"stylers": [{
+							"lightness": 5
+						}]
+					}, {
+						"featureType": "poi",
+						"elementType": "labels",
+						"stylers": [{
+							"visibility": "off"
+						}]
+					}, {
+						"featureType": "transit",
+						"elementType": "labels",
+						"stylers": [{
+							"visibility": "off"
+						}]
+					}]
+				};
+				
+				map = new google.maps.Map(document.getElementById("map"), mapProp);
+				
+				// Center map in user location
+				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function(position) {
-						var pos = {
-							lat: position.coords.latitude,
-							lng: position.coords.longitude
-						};
+						var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 						map.setCenter(pos);
 						map.setZoom(15);
 					})
 				}
- 				
- 				// Set markers
- 				<c:forEach items="${thoughts}" var="thought">
+				
+				// Toughts
+				var thoughts = [
+				<c:forEach items="${thoughts}" var="thought">
+					{
+						id: ${thought.id},
+						text: "${thought.text}",
+						tag: "${thought.tag}",
+						latitude: ${thought.latitude},
+						longitude: ${thought.longitude}
+					},
+				</c:forEach>
+				];
+				
+				if (typeof(window.sessionStorage) !== "undefined") {
+					window.sessionStorage.thoughts = JSON.stringify(thoughts);
+				}
+				
+				// Set markers
+				markers = [];
+				thoughts.forEach((thought) => {
 					// Create info window content   
-					var infoWindowContent = '<div class="info_content">' +
-							'<h3>${thought.text}</h3>' +
-							'<p>${thought.tag}</p>' +
+					let infoWindowContent = '<div class="info_content">' +
+							'<h3>' + thought.text + '</h3>' +
+							'<p>' + thought.tag + '</p>' +
 						'</div>';
 					
 					// Initialise the inforWindow
-					var infoWindow = new google.maps.InfoWindow({
+					let infoWindow = new google.maps.InfoWindow({
 						content: infoWindowContent
 					});
-
- 					var latitude = ${thought.latitude};
- 					var longitude = ${thought.longitude};
- 					var marker = new google.maps.Marker({
- 						position: new google.maps.LatLng(latitude, longitude),
+					
+ 					let marker = new google.maps.Marker({
+ 						position: new google.maps.LatLng(thought.latitude, thought.longitude),
  						icon:'assets/img/map-marker.png',
- 						title: '${thought.text}'
+ 						title: thought.text
  					});
  					marker.setMap(map);
  					
@@ -64,7 +98,64 @@
  					marker.addListener('click', function() {
 						infowindow.open(map, marker);
 					});
- 				</c:forEach>
+ 					
+ 					markers.push(marker);
+				});
+			}
+			
+ 		</script>
+ 		<script type="text/javascript">
+			function setMapOnAll(map) {
+				for (var i = 0; i < markers.length; i++) {
+					markers[i].setMap(map);
+				}
+			}
+			
+ 			function reloadThoughts() {
+ 				
+ 				var thoughts = JSON.parse(window.sessionStorage.getItem("thoughts"));
+ 				
+ 				var thoughtsHTML = "";
+ 				
+ 				markers = [];
+ 				
+ 				thoughts.forEach((thought) => {
+ 					thoughtsHTML += `
+	 					<div class="thought">
+							<p class="thought-text">` + thought.text + `</p>
+							<p class="thought-tag">` + thought.tag + `</p>
+						</div>
+ 					`;
+ 					
+ 					// Clear markers
+ 					setMapOnAll(null);
+ 					
+					// Create info window content   
+					let infoWindowContent = '<div class="info_content">' +
+							'<h3>' + thought.text + '</h3>' +
+							'<p>' + thought.tag + '</p>' +
+						'</div>';
+					
+					// Initialise the inforWindow
+					let infoWindow = new google.maps.InfoWindow({
+						content: infoWindowContent
+					});
+					
+ 					let marker = new google.maps.Marker({
+ 						position: new google.maps.LatLng(thought.latitude, thought.longitude),
+ 						icon:'assets/img/map-marker.png',
+ 						title: thought.text
+ 					});
+ 					marker.setMap(map);
+ 					
+ 					// Add click listener
+ 					marker.addListener('click', function() {
+						infowindow.open(map, marker);
+					});
+ 					markers.push(marker);
+				});
+ 				
+ 				document.getElementById("thoughts-container").innerHTML = thoughtsHTML;
  			}
  		</script>
 	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbYLfQmvKGhhqz1nNee2CtW_Xv87dKHn4&callback=initMap"></script>

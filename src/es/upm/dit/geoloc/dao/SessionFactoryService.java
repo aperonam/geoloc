@@ -13,8 +13,8 @@ public class SessionFactoryService {
 	}
 	
 	public static SessionFactory get() {
-		if( null == sfs ) sfs = new SessionFactoryService();
+		if (null == sfs) sfs = new SessionFactoryService();
 		return sfs.sessionFactory;
 	}
-            	
+
 }

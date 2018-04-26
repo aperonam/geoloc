@@ -16,8 +16,12 @@ body {
 }
 
 #log-in-button {
-	display: block;
+	display: inline-block;
 	margin-top: 52px;
+}
+
+a#log-in-button:hover {
+	opacity: 0.7;
 }
 
 #log-in-button img {
@@ -26,6 +30,39 @@ body {
 	margin-right: auto;
 	width: 146px;
 	background-size: 33px 146px;
+}
+
+#info {
+	margin-top: 44px;
+	color: #c7c7c7;
+	font-size: 12px;
+}
+
+#recurses {
+	margin-bottom: 60px;
+}
+
+#recurses p {
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 12px;
+	color: #c7c7c7;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 49px;
+	background-color: #FBFBFB;
+}
+
+footer a {
+	display: inline-block;
+	margin-top: 17px;
+	font-size: 13px;
+	color: #b9b9b9;
 }
 
 /* Left container */
@@ -42,7 +79,8 @@ body {
 }
 
 #left-container-content {
-	padding: 53px 41px;
+	padding: 36px 41px;
+	margin-bottom: 142px;
 }
 
 #title {
@@ -54,7 +92,7 @@ body {
 
 .section-title {
 	font-family: AvenirNext-Medium;
-	font-size: 18px;
+	font-size: 16px;
 	color: #000000;
 	margin: 0;
 	margin-top: 20px;
@@ -70,16 +108,16 @@ body {
 	margin-bottom: 10px;
 }
 
-.thought.thought-text {
+.thought .thought-text {
 	font-family: AvenirNext-Regular;
-	font-size: 17px;
+	font-size: 14px;
 	color: #000000;
 	margin: 0;
 }
 
-.thought.thought-tag {
+.thought .thought-tag {
 	font-family: AvenirNext-Regular;
-	font-size: 17px;
+	font-size: 14px;
 	color: #A2A2A2;
 	margin: 0;
 }
@@ -98,27 +136,64 @@ body {
 
 #share-container {
 	position: fixed;
-	width: 439px;
-	height: 247px;
+	bottom: 0;
+	left: 0;
+	width: inherit;
+	height: 166px;
 	background: #FFFFFF;
-	box-shadow: 0 2px 41px 8px rgba(0,0,0,0.08);
-	border-radius: 4px;
+	background: linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 79%,rgba(255,255,255,0) 100%);
 }
 
 #share-text {
+	margin: 39px;
+	width: 296px;
+	height: 26px;
 	border: none;
+	resize: none;
 	background-color: transparent;
 	color: black;
+	font-size: 14px;
 	font-family: AvenirNext-Regular;
+	margin-bottom: 5px;
+	margin-top: 50px;
+}
+
+textarea#share-text:focus {
+	outline: none;
 }
 
 #share-tag {
 	border: none;
-	background-color: #F0F0F0;
-	border-radius: 8px;
+	background-color: #f7f7f7;
+	border-radius: 21px;
+	margin-left: 39px;
+	padding: 10px 16px;
+}
+
+input#share-tag::placeholder {
+	color: #c1c1c1;
+}
+
+input#share-tag:focus {
+	outline: none;
 }
 
 #share-button {
+	width: 47px;
+	height: 47px;
+	margin-left: 100px;
+	border: none;
+	border-radius: 24px;
+	cursor: pointer;
+	background-color: #FFAC4F;
+	background: linear-gradient(to right, rgba(255,172,79,1) 0%,rgba(255,105,181,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
 
+#share-button:hover {
+	opacity: 0.9;
+}
+
+#share-button:focus {
+	outline: none;
 }
 

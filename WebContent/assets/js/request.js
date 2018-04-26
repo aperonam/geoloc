@@ -17,24 +17,34 @@ function postThought(text, tag, latitude, longitude) {
 	}
 
 	// Make request
-	fetch('https://localhost:8080/geoloc/thought', {
+	fetch('http://localhost:8080/geoloc/api/thought', {
 		method: 'POST',
 		headers: {
 		Accept: 'application/json',
 			'Content-Type': 'application/json',
 		},
+		credentials: 'include',
 		body: JSON.stringify(thought),
 	}).then((response) => {
-		return response.json();
+		var thought = response.json();
+		
+		// Add thought to thoughts storage
+		var thoughts = JSON.parse(window.sessionStorage.getItem("thoughts"));
+		thoughts.splice(0, 0, thought);
+		window.sessionStorage.thoughts = JSON.stringify(thoughts);
+		
+		// Reload thoughts
+		reloadThoughts();
 	}).catch((error) => {
-		console.error(error);
+		console.log(error);
 	});
 }
 
 function deleteThought(id) {
 	// Make request
-	fetch('https://localhost:8080/geoloc/thought?id=' + id, {
+	fetch('http://localhost:8080/geoloc/api/thought?id=' + id, {
 		method: 'DELETE',
+		credentials: 'include',
 		headers: {
 		Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -43,6 +53,6 @@ function deleteThought(id) {
 	}).then((response) => {
 		return response.json();
 	}).catch((error) => {
-		console.error(error);
+		console.log(error);
 	});
 }

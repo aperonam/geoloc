@@ -38,7 +38,7 @@ public class ThoughtDAOImplementation implements ThoughtDAO {
 	}
 
 	
-	public Thought readThought(double id) {
+	public Thought readThought(int id) {
 		Thought thought = null;
 		Session session = SessionFactoryService.get().openSession();
 		try {
@@ -58,7 +58,7 @@ public class ThoughtDAOImplementation implements ThoughtDAO {
 		Session session = SessionFactoryService.get().openSession();
 		try {
 			session.beginTransaction();
-			thoughts = session.createQuery("SELECT text, tag, latitude, longitude FROM Thought;").list();
+			thoughts = session.createQuery("SELECT * FROM Thought").list();
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: Manage Exceptions

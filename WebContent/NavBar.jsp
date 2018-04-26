@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div id="left-container">
 	<div id="left-container-content">
 		<p id="title">Geoloc</p>
@@ -13,4 +15,5 @@
 			</c:forEach>
 		</div>
 	</div>
+	<%@ include file = "Post.jsp" %>
 </div>

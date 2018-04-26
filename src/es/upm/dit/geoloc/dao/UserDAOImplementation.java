@@ -30,7 +30,7 @@ public class UserDAOImplementation implements UserDAO{
 	}
 
 	@Override
-	public User readUser(double id) {
+	public User readUser(int id) {
 		User user = null;
 		Session session = SessionFactoryService.get().openSession();
 		try {
