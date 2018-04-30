@@ -23,6 +23,10 @@
     <servlet-name>thought</servlet-name>
     <servlet-class>es.upm.dit.geoloc.servlets.ThoughtServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>like</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.LikeServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>signin</servlet-name>
     <url-pattern>/signin</url-pattern>
@@ -42,6 +46,10 @@
   <servlet-mapping>
     <servlet-name>thought</servlet-name>
     <url-pattern>/api/thought</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>like</servlet-name>
+    <url-pattern>/api/thought/like</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>

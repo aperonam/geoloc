@@ -62,8 +62,10 @@ public class HomeServlet extends HttpServlet {
 		if (thoughts == null) {
 			thoughts = new ArrayList<Thought>();
 			Thought t = new Thought();
-			t.setText("Grande!!");
-			t.setTag("pepe");
+			t.setText("Comentario de prueba");
+			t.setTag("UPM");
+			t.setLatitude(40.4478104);
+			t.setLongitude(-3.716025);
 			thoughts.add(t);
 		}
 		

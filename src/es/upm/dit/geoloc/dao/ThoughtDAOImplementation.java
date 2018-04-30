@@ -58,7 +58,7 @@ public class ThoughtDAOImplementation implements ThoughtDAO {
 		Session session = SessionFactoryService.get().openSession();
 		try {
 			session.beginTransaction();
-			thoughts = session.createQuery("SELECT * FROM Thought").list();
+			thoughts = session.createQuery("FROM Thought").list();
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: Manage Exceptions

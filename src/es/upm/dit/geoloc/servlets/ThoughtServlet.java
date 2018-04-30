@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.geoloc.dao.ThoughtDAOImplementation;
+import es.upm.dit.geoloc.dao.UserDAOImplementation;
 import es.upm.dit.geoloc.dao.model.Thought;
 import es.upm.dit.geoloc.dao.model.User;
 import twitter4j.JSONException;
@@ -45,10 +46,16 @@ public class ThoughtServlet extends HttpServlet {
 				return;
 			}
 			
+			User user = UserDAOImplementation.getInstance().readUser((int) twitter.getId());
+			if (user == null) {
+				PrintWriter out = response.getWriter();
+				response.setStatus(401);
+				out.print("Not Authorized");
+				return;
+			}
+			
 			// Create Thought object
 			Thought thought = new Thought();
-			User user = new User();
-			user.setId((int) twitter.getId());
 			thought.setUser(user);
 			
 			if (jsonBody.getString("text") == null) {

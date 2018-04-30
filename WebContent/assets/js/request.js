@@ -26,15 +26,13 @@ function postThought(text, tag, latitude, longitude) {
 		credentials: 'include',
 		body: JSON.stringify(thought),
 	}).then((response) => {
-		var thought = response.json();
-		
-		// Add thought to thoughts storage
-		var thoughts = JSON.parse(window.sessionStorage.getItem("thoughts"));
-		thoughts.splice(0, 0, thought);
-		window.sessionStorage.thoughts = JSON.stringify(thoughts);
-		
-		// Reload thoughts
-		reloadThoughts();
+		response.json().then(thought => {
+			// Add thought to thoughts storage
+			window.thoughts.splice(0, 0, thought);
+			
+			// Reload thoughts
+			reloadThoughts();
+		});
 	}).catch((error) => {
 		console.log(error);
 	});

@@ -1,15 +1,22 @@
 package es.upm.dit.geoloc.dao.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Formula;
 
 @Entity
 public class Thought implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne
 	private User user;
@@ -18,7 +25,6 @@ public class Thought implements Serializable {
 	private double latitude;
 	private double longitude;
 	// private DATE createdAt;
-	
 	
 	public Thought () {
 		

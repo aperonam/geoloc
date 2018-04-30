@@ -69,9 +69,7 @@
 				</c:forEach>
 				];
 				
-				if (typeof(window.sessionStorage) !== "undefined") {
-					window.sessionStorage.thoughts = JSON.stringify(thoughts);
-				}
+				window.thoughts = thoughts;
 				
 				// Set markers
 				markers = [];
@@ -113,7 +111,7 @@
 			
  			function reloadThoughts() {
  				
- 				var thoughts = JSON.parse(window.sessionStorage.getItem("thoughts"));
+ 				var thoughts = window.thoughts;
  				
  				var thoughtsHTML = "";
  				
