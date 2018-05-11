@@ -7,9 +7,10 @@
 ```
 git clone https://github.com/aperonam/geoloc
 ```
-3. Change to "publicar-pensamiento" branch:
+3. Change to "dev-new-structure" branch:
 ```
-git checkout publicar-pensamiento
+git checkout dev-new-structure
 ```
 4. Open Eclipse and click on 'File > Open Projects from File System...'.
-5. Select geoloc project directory and click finish.
+5. Click 'Project > Clean...'.
+5. Click 'Run as > Run on server'.
