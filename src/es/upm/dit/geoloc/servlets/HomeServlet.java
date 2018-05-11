@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.geoloc.dao.ChatDAOImplementation;
 import es.upm.dit.geoloc.dao.ThoughtDAOImplementation;
 import es.upm.dit.geoloc.dao.UserDAOImplementation;
+import es.upm.dit.geoloc.dao.model.Chat;
 import es.upm.dit.geoloc.dao.model.Thought;
 import es.upm.dit.geoloc.dao.model.User;
 import twitter4j.Twitter;
@@ -36,13 +38,14 @@ public class HomeServlet extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + "/login.jsp");
 			return;
 		}
-		
+		User user = null;
 		try {
-			User user = UserDAOImplementation.getInstance().readUser((int) twitter.getId());
+			user = UserDAOImplementation.getInstance().readUser((int) twitter.getId());
 			if (user == null) {
 				resp.sendRedirect(req.getContextPath() + "/login.jsp");
 				return;
 			}
+			
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,17 +63,17 @@ public class HomeServlet extends HttpServlet {
 		
 		
 		if (thoughts == null) {
-			thoughts = new ArrayList<Thought>();
-			Thought t = new Thought();
-			t.setText("Comentario de prueba");
-			t.setTag("UPM");
-			t.setLatitude(40.4478104);
-			t.setLongitude(-3.716025);
-			thoughts.add(t);
+			thoughts = ThoughtDAOImplementation.getInstance().readThoughts();
 		}
+		
+		// Chats
+		// List<Chat> requests = ChatDAOImplementation.getInstance().readUserChatRequests(user);
+		// List<Chat> chats = ChatDAOImplementation.getInstance().readUserChats(user);
 		
 		req.getSession().setAttribute("thoughts", thoughts);
 		req.getSession().setAttribute("twitter", twitter);
+		// req.getSession().setAttribute("requests", requests);
+		// req.getSession().setAttribute("chats", chats);
 		
 		resp.setContentType("text/html");
 		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");

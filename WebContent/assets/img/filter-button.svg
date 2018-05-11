@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="47px" height="48px" viewBox="0 0 47 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="88.7087545%" y1="5.53952801%" x2="9.72554907%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#4F7AFF" offset="0%"></stop>
+            <stop stop-color="#69E8FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home" transform="translate(-1343.000000, -66.000000)">
+            <g id="Group-4" transform="translate(1343.000000, 66.000000)">
+                <ellipse id="Oval" fill="url(#linearGradient-1)" cx="23.5" cy="24" rx="23.5" ry="24"></ellipse>
+                <g id="filter-tool-black-shape" transform="translate(13.000000, 16.000000)" fill="#FFFFFF">
+                    <g id="Capa_1">
+                        <path d="M19.8936973,0.567096774 C19.7328536,0.198808933 19.4544913,0.0146401985 19.0572705,0.0144416873 L0.921290323,0.0144416873 C0.524615385,0.0144416873 0.245856079,0.198808933 0.0852605459,0.567096774 C-0.075235732,0.954243176 -0.00918114144,1.28506203 0.283722084,1.55890819 L7.26918114,8.54416873 L7.26918114,15.430273 C7.26918114,15.6761787 7.35895782,15.8884367 7.53836228,16.0681886 L11.1654094,19.6951365 C11.3355831,19.8744913 11.5480397,19.9645161 11.8031762,19.9645161 C11.9164268,19.9645161 12.0344417,19.9407444 12.1572705,19.8935484 C12.5258065,19.7328536 12.7101241,19.4542928 12.7101241,19.0575682 L12.7101241,8.54421836 L19.695335,1.55895782 C19.9883375,1.28511166 20.0542432,0.95439206 19.8936973,0.567096774 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

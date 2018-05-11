@@ -23,6 +23,7 @@ public class Chat implements Serializable {
 	@ManyToOne
 	private Thought thought;
 	private boolean accepted;
+	private String message;
 	
 	public Chat() {}
 	
@@ -64,6 +65,14 @@ public class Chat implements Serializable {
 	
 	public void setAccepted(boolean accepted) {
 		this.accepted = accepted;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 }

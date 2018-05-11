@@ -81,7 +81,7 @@ public class ThoughtServlet extends HttpServlet {
 			}
 			
 			// Make db Request
-			Integer thoughtId = ThoughtDAOImplementation.getInstance().createThought(thought);
+			thought = ThoughtDAOImplementation.getInstance().createThought(thought);
 			
 			// Response configuration
 			response.setContentType("application/json");
@@ -92,7 +92,7 @@ public class ThoughtServlet extends HttpServlet {
 			// JSON Response
 			JSONObject jsonResponse = new JSONObject();
 			
-			jsonResponse.put("id", thoughtId);
+			jsonResponse.put("id", thought.getId());
 			jsonResponse.put("text", thought.getText());
 			jsonResponse.put("tag", thought.getTag());
 			

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="47px" height="48px" viewBox="0 0 47 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 4 Copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="88.7087545%" y1="5.53952801%" x2="9.72554907%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#4F7AFF" offset="0%"></stop>
+            <stop stop-color="#69E8FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home" transform="translate(-1343.000000, -151.000000)">
+            <g id="Group-4-Copy-2" transform="translate(1343.000000, 151.000000)">
+                <ellipse id="Oval" fill="url(#linearGradient-1)" cx="23.5" cy="24" rx="23.5" ry="24"></ellipse>
+                <path d="M30.2107459,16.7837209 C28.4151856,14.9881607 26.033156,14 23.4944668,14 C20.9557776,14 18.573748,14.9881607 16.7781877,16.7837209 C13.3075746,20.254334 13.0665598,25.8097252 16.1796677,29.5575053 C15.8743822,30.172093 15.3843188,30.8871036 14.6572575,31.2446089 C14.3077861,31.4173362 14.1109573,31.7909091 14.171211,32.1765328 C14.2314647,32.5621564 14.5287163,32.8634249 14.91434,32.9236786 C15.0951011,32.951797 15.3521835,32.9799154 15.6655028,32.9799154 C16.5050376,32.9799154 17.7422469,32.7830867 19.0075746,31.8712474 C20.4175112,32.630444 21.9600059,33 23.4904499,33 C25.9488009,33 28.3830503,32.0479915 30.2147628,30.2162791 C32.0103231,28.4207188 32.9984837,26.0386892 32.9984837,23.5 C32.9984837,20.9613108 32.0063061,18.5792812 30.2107459,16.7837209 Z" id="Shape" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

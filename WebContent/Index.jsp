@@ -18,6 +18,9 @@
 	<body>
 		<div id="map"></div>
 		<%@ include file = "NavBar.jsp" %>
+		<%@ include file = "NavButtons.jsp" %>
+		<%@ include file = "Filter.jsp" %>
+		<%@ include file = "Chats.jsp" %>
 		<script>
 			function initMap() {
 				var mapProp = {
@@ -53,8 +56,19 @@
 						var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 						map.setCenter(pos);
 						map.setZoom(15);
+						window.latitude = position.coords.latitude;
+						window.longitude = position.coords.longitude;
 					})
 				}
+				
+				// Create the search box and link it to the UI element.
+				var input = document.getElementById('search-bar');
+				var searchBox = new google.maps.places.SearchBox(input);
+		        
+				// Bias the SearchBox results towards current map's viewport.
+				map.addListener('bounds_changed', function() {
+					searchBox.setBounds(map.getBounds());
+				});
 				
 				// Toughts
 				var thoughts = [
@@ -64,7 +78,8 @@
 						text: "${thought.text}",
 						tag: "${thought.tag}",
 						latitude: ${thought.latitude},
-						longitude: ${thought.longitude}
+						longitude: ${thought.longitude},
+						numberOfLikes: ${thought.numberOfLikes}
 					},
 				</c:forEach>
 				];
@@ -94,7 +109,7 @@
  					
  					// Add click listener
  					marker.addListener('click', function() {
-						infowindow.open(map, marker);
+						infoWindow.open(map, marker);
 					});
  					
  					markers.push(marker);
@@ -122,6 +137,11 @@
 	 					<div class="thought">
 							<p class="thought-text">` + thought.text + `</p>
 							<p class="thought-tag">` + thought.tag + `</p>
+							<div class="thought-buttons">
+								<button class="like-button" onclick="postLike(` + thought.id + `)"><img alt="like-icon" src="./assets/img/like-icon.svg"></button>
+								<p class="thought-tag">` + thought.numberOfLikes + ` likes</p>
+							<button class="chat-button" onclick="requestChat(` + thought.id + `)"><img alt="chat-icon" src="./assets/img/chat-icon.png"></button>
+						</div>
 						</div>
  					`;
  					
@@ -148,7 +168,7 @@
  					
  					// Add click listener
  					marker.addListener('click', function() {
-						infowindow.open(map, marker);
+						infoWindow.open(map, marker);
 					});
  					markers.push(marker);
 				});
@@ -156,6 +176,6 @@
  				document.getElementById("thoughts-container").innerHTML = thoughtsHTML;
  			}
  		</script>
-	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbYLfQmvKGhhqz1nNee2CtW_Xv87dKHn4&callback=initMap"></script>
+	    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbYLfQmvKGhhqz1nNee2CtW_Xv87dKHn4&libraries=places&callback=initMap"></script>
 	</body>
 </html>

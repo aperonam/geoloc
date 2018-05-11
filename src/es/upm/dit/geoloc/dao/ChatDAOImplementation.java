@@ -4,29 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.SessionFactory;
 
+import es.upm.dit.geoloc.dao.model.Chat;
+import es.upm.dit.geoloc.dao.model.Likee;
 import es.upm.dit.geoloc.dao.model.Thought;
+import es.upm.dit.geoloc.dao.model.User;
 
-
-public class ThoughtDAOImplementation implements ThoughtDAO {
-
-	private static ThoughtDAOImplementation instance;
-	private ThoughtDAOImplementation() {};
-	public static ThoughtDAOImplementation getInstance() {
-		if (null == instance) instance = new ThoughtDAOImplementation();
+public class ChatDAOImplementation implements ChatDAO {
+	
+	private static ChatDAOImplementation instance;
+	private ChatDAOImplementation() {}
+	public static ChatDAOImplementation getInstance() {
+		if (null == instance) instance = new ChatDAOImplementation();
 		return instance;
 	}
 
-	
-	public Thought createThought(Thought thought) {
+	@Override
+	public Chat requestChat(Chat chat) {
 		Session session = SessionFactoryService.get().openSession();
-		
 		try {
 			session.beginTransaction();
-			int id = (int) session.save(thought);
-			thought.setId(id);
+			int id = (int) session.save(chat);
+			chat.setId(id);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: Manage Exceptions
@@ -34,50 +33,81 @@ public class ThoughtDAOImplementation implements ThoughtDAO {
 		} finally {
 			session.close();
 		}
-		return thought;
+		return chat;
 	}
 
-	
-	public Thought readThought(int id) {
+	@Override
+	public void acceptChatRequest(Chat chat) {
 		Session session = SessionFactoryService.get().openSession();
-		Thought thought = null;
 		try {
 			session.beginTransaction();
-			thought = session.get(Thought.class, id);
+			chat.setAccepted(true);
+			session.saveOrUpdate(chat);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: Manage Exceptions
 		} finally {
 			session.close();
 		}
-		return thought;
 	}
 	
-	public List<Thought> readThoughts() {
+	@Override
+	public void declineChatRequest(Chat chat) {
 		Session session = SessionFactoryService.get().openSession();
-		List<Thought> thoughts = new ArrayList<Thought>();
 		try {
 			session.beginTransaction();
-			thoughts.addAll(session.createQuery("SELECT t FROM Thought t").getResultList());
+			session.delete(chat);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: Manage Exceptions
 		} finally {
 			session.close();
 		}
-		return thoughts;
 	}
-	
-	public List<Thought> readThoughtsNear(double latitude, double longitude) {
+
+	@Override
+	public Chat readChat(int id) {
 		Session session = SessionFactoryService.get().openSession();
-		List<Thought> thoughts = null;
+		Chat chat = null;
 		try {
 			session.beginTransaction();
-			thoughts.addAll(session.createQuery("SELECT t FROM Thought t WHERE t.latitude < :latitudeMax AND t.latitude > :latitudeMin AND t.longitude < :longitudeMax AND t.longitude > :longitudeMin")
-					.setParameter("latitudeMax", latitude + 0.04)
-					.setParameter("latitudeMin", latitude - 0.04)
-					.setParameter("longitudeMax", longitude + 0.04)
-					.setParameter("longitudeMin", longitude - 0.04)
+			chat = session.get(Chat.class, id);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: Manage Exceptions
+		} finally {
+			session.close();
+		}
+		return chat;
+	}
+	
+	@Override
+	public Chat readChat(int thoughtId, int userId) {
+		Session session = SessionFactoryService.get().openSession();
+		Chat chat = null;
+		try {
+			session.beginTransaction();
+			chat = (Chat) session.createQuery("SELECT c FROM Chat c WHERE c.thought_id= :thougthId AND c.user_id= :userId")
+					.setParameter("thoughtId", thoughtId)
+					.setParameter("userId", userId)
+					.uniqueResult();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: Manage Exceptions
+		} finally {
+			session.close();
+		}
+		return chat;
+	}
+
+	@Override
+	public List<Chat> readUserChats(User user) {
+		Session session = SessionFactoryService.get().openSession();
+		List<Chat> chats = new ArrayList<Chat>();
+		try {
+			session.beginTransaction();
+			chats.addAll(session.createQuery("SELECT c FROM Chat c WHERE (c.user_id= :id OR c.to_user_id= :id) AND c.accepted=true")
+					.setParameter("id", user.getId())
 					.getResultList());
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -85,53 +115,25 @@ public class ThoughtDAOImplementation implements ThoughtDAO {
 		} finally {
 			session.close();
 		}
-		return thoughts;
+		return chats;
 	}
 	
-	public List<Thought> readPopularThoughts() {
+	@Override
+	public List<Chat> readUserChatRequests(User user) {
 		Session session = SessionFactoryService.get().openSession();
-		List<Thought> thoughts = null;
+		List<Chat> chats = new ArrayList<Chat>();
 		try {
 			session.beginTransaction();
-			// TODO
-			thoughts.addAll(session.createQuery("SELECT t FROM Thought t").getResultList());
+			chats.addAll(session.createQuery("SELECT c FROM Chat c WHERE c.to_user_id= :id AND c.accepted=false")
+					.setParameter("id", user.getId())
+					.getResultList());
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: Manage Exceptions
 		} finally {
 			session.close();
 		}
-		return thoughts;
-	}
-
-	
-	public void updateThought(Thought thought) {
-		Session session = SessionFactoryService.get().openSession();
-		try {
-			session.beginTransaction();
-			session.saveOrUpdate(thought);
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			// TODO: Manage Exceptions
-		} finally {
-			session.close();
-		}
-		
-	}
-
-	
-	public void deleteThought(Thought thought) {
-		Session session = SessionFactoryService.get().openSession();
-		try {
-			session.beginTransaction();
-			session.delete(thought);
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			// TODO: Manage Exceptions
-		} finally {
-			session.close();
-		}
-		
+		return chats;
 	}
 
 }

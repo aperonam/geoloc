@@ -95,7 +95,9 @@ footer a {
 	font-size: 16px;
 	color: #000000;
 	margin: 0;
-	margin-top: 20px;
+	margin-top: 28px;
+	padding-bottom: 10px;
+	border-bottom: 1px #f5f5f5 solid;
 }
 
 #thoughts-container {
@@ -185,8 +187,6 @@ input#share-tag:focus {
 	border: none;
 	border-radius: 24px;
 	cursor: pointer;
-	background-color: #FFAC4F;
-	background: linear-gradient(to right, rgba(255,172,79,1) 0%,rgba(255,105,181,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 #share-button:hover {
@@ -197,3 +197,141 @@ input#share-tag:focus {
 	outline: none;
 }
 
+#search-bar {
+	border: none;
+	background-color: #F8F8F8;
+	border-radius: 14px;
+	margin-top: 20px;
+	padding: 13px 15px;
+	width: 90%;
+}
+
+input#search-bar::placeholder {
+	color: #B4B4B4;
+}
+
+input#search-bar:focus {
+	outline: none;
+}
+
+#nav-logo {
+	width: 121px;
+	background-size: 333px 137px;
+	margin-top: 2px;
+}
+
+.thought-buttons {
+	display: flex;
+	align-items: center;
+	margin-top: 4px;
+}
+
+.like-button {
+	border: none;
+	cursor: pointer;
+}
+
+.like-button:hover {
+	opacity: 0.5
+}
+
+.like-button:focus {
+	outline: none;
+}
+
+.like-button img {
+	width: 14px;
+}
+
+.chat-button {
+	border: none;
+	cursor: pointer;
+}
+
+.chat-button:hover {
+	opacity: 0.5
+}
+
+.chat-button:focus {
+	outline: none;
+}
+
+.chat-button img {
+	width: 14px;
+}
+
+/* Nav Buttons */
+
+#nav-buttons {
+	position: fixed;
+	right: 5px;
+	top: 20px;
+	margin-top: 20px;
+}
+
+#nav-buttons button {
+	display: block;
+	border: none;
+	cursor: pointer;
+	background: transparent;
+	margin-top: 9px;
+}
+
+#nav-buttons button:focus {
+	outline: none;
+}
+
+#nav-buttons button:active {
+	opacity: 0.7;
+}
+
+/* Chat View */
+
+#chats {
+	position: fixed;
+	width: 380px;
+	height: 250px;
+	background: white;
+	box-shadow: 0 2px 19px 8px rgba(0,0,0,0.07);
+	border-radius: 6px;
+	right: 72px;
+	top: 100px;
+	padding: 10px;
+}
+
+/* Filter View */
+
+#filter {
+	position: fixed;
+	width: 380px;
+	height: 250px;
+	background: white;
+	box-shadow: 0 2px 19px 8px rgba(0,0,0,0.07);
+	border-radius: 6px;
+	right: 72px;
+	top: 50px;
+	text-align: center;
+}
+
+#filter p {
+	font-size: 29px;
+	margin-top: 60px;
+	margin-bottom: 10px;
+}
+
+#tag-input {
+	border: none;
+	background-color: #F8F8F8;
+	border-radius: 14px;
+	margin-top: 20px;
+	padding: 13px 15px;
+	width: 250px;
+}
+
+input#tag-input::placeholder {
+	color: #B4B4B4;
+}
+
+input#tag-input:focus {
+	outline: none;
+}

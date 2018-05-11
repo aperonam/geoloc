@@ -27,6 +27,14 @@
     <servlet-name>like</servlet-name>
     <servlet-class>es.upm.dit.geoloc.servlets.LikeServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>chat</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.ChatServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>answerChatRequest</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.AnswerChatRequestServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>signin</servlet-name>
     <url-pattern>/signin</url-pattern>
@@ -52,6 +60,14 @@
     <url-pattern>/api/thought/like</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>chat</servlet-name>
+    <url-pattern>/api/thought/chat</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>answerChatRequest</servlet-name>
+    <url-pattern>/api/chat</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.jpg</url-pattern>
 </servlet-mapping>
@@ -66,5 +82,9 @@
 <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.css</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.svg</url-pattern>
 </servlet-mapping>
 </web-app>

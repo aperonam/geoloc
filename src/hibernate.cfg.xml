@@ -15,5 +15,7 @@
 		<property name="hbm2ddl.auto">update</property>
 		<mapping class="es.upm.dit.geoloc.dao.model.Thought" />
 		<mapping class="es.upm.dit.geoloc.dao.model.User" />
+		<mapping class="es.upm.dit.geoloc.dao.model.Likee" />
+		<mapping class="es.upm.dit.geoloc.dao.model.Chat" />
 	</session-factory>
 </hibernate-configuration>

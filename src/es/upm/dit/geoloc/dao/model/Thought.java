@@ -25,6 +25,10 @@ public class Thought implements Serializable {
 	private double latitude;
 	private double longitude;
 	// private DATE createdAt;
+	@Formula("(select count(*) from Likee l where l.thought_id = id)")
+    private int numberOfLikes;
+	// @Formula("(select case when exists (select l from Likee l where l.thought_id = id and l.user_id=) then TRUE else FALSE end)")
+    // private boolean me_like;
 	
 	public Thought () {
 		
@@ -90,6 +94,14 @@ public class Thought implements Serializable {
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+	
+	public int getNumberOfLikes() {
+		return numberOfLikes;
+	}
+	
+	public void setNumberOfLikes(int numberOfLikes) {
+		this.numberOfLikes = numberOfLikes;
 	}
 
 }

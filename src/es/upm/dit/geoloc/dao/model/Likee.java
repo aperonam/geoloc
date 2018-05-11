@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Like implements Serializable {
+public class Likee implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Like implements Serializable {
 	@ManyToOne
 	private Thought thought;
 	
-	public Like() {}
+	public Likee() {}
 	
 	public int getId() {
 		return this.id;

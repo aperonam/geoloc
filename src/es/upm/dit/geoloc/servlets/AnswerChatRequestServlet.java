@@ -9,20 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.upm.dit.geoloc.dao.LikeDAOImplementation;
-import es.upm.dit.geoloc.dao.ThoughtDAOImplementation;
+import es.upm.dit.geoloc.dao.ChatDAOImplementation;
 import es.upm.dit.geoloc.dao.UserDAOImplementation;
-import es.upm.dit.geoloc.dao.model.Likee;
-import es.upm.dit.geoloc.dao.model.Thought;
+import es.upm.dit.geoloc.dao.model.Chat;
 import es.upm.dit.geoloc.dao.model.User;
 import twitter4j.JSONException;
 import twitter4j.JSONObject;
 import twitter4j.Twitter;
 
-public class LikeServlet extends HttpServlet {
-
+public class AnswerChatRequestServlet extends HttpServlet {
+	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// Request body
 		String body = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 		try {
@@ -53,30 +51,24 @@ public class LikeServlet extends HttpServlet {
 				return;
 			}
 			
-			// Read Thought
-			Thought thought = ThoughtDAOImplementation.getInstance().readThought(jsonBody.getInt("thoughtId"));
-			if (thought == null) {
+			if (!jsonBody.has("chatId")) {
 				PrintWriter out = resp.getWriter();
-				resp.setStatus(404);
-				out.print("Thought does not exist");
+				resp.setStatus(400);
+				out.print("Bad request");
 				return;
 			}
-			
-			// See if like already exist
-			if (LikeDAOImplementation.getInstance().readLike((int) thought.getId(), (int) user.getId()) != null) {
-				PrintWriter out = resp.getWriter();
-				resp.setStatus(200);
-				out.print("Like already exist");
-				return;
-			}
-			
-			// Create Like object
-			Likee like = new Likee();
-			like.setUser(user);
-			like.setThought(thought);
 			
 			// Make db Request
-			like = LikeDAOImplementation.getInstance().createLike(like);
+			Chat chat = ChatDAOImplementation.getInstance().readChat(jsonBody.getInt("chatId"));
+			
+			if (chat == null) {
+				PrintWriter out = resp.getWriter();
+				resp.setStatus(404);
+				out.print("Chat request does not exist");
+				return;
+			}
+			
+			ChatDAOImplementation.getInstance().acceptChatRequest(chat);
 			
 			// Response configuration
 			resp.setContentType("application/json");
@@ -87,7 +79,8 @@ public class LikeServlet extends HttpServlet {
 			// JSON Response
 			JSONObject jsonResponse = new JSONObject();
 			
-			jsonResponse.put("id", like.getId());
+			jsonResponse.put("id", chat.getId());
+			jsonResponse.put("accepted", chat.getAccepted());
 			
 			// String output		
 			out.print(jsonResponse.toString());
@@ -124,24 +117,31 @@ public class LikeServlet extends HttpServlet {
 				return;
 			}
 			
-			// Get Like object
-			Likee like = LikeDAOImplementation.getInstance().readLike(jsonBody.getInt("like_id"));
-			if (like == null) {
+			if (!jsonBody.has("thoughtId")) {
 				PrintWriter out = resp.getWriter();
-				resp.setStatus(404);
-				out.print("Not found");
+				resp.setStatus(400);
+				out.print("Bad request");
 				return;
 			}
 			
-			// Remove like
-			if (like.getUser().getId() == user.getId()) {
-				LikeDAOImplementation.getInstance().deleteLike(like);
-			} else {
+			if (!jsonBody.has("chatId")) {
 				PrintWriter out = resp.getWriter();
-				resp.setStatus(401);
-				out.print("Not Authorized");
+				resp.setStatus(400);
+				out.print("Bad request");
 				return;
 			}
+			
+			// Make db Request
+			Chat chat = ChatDAOImplementation.getInstance().readChat(jsonBody.getInt("chatId"));
+			
+			if (chat == null) {
+				PrintWriter out = resp.getWriter();
+				resp.setStatus(404);
+				out.print("Chat request does not exist");
+				return;
+			}
+			
+			ChatDAOImplementation.getInstance().declineChatRequest(chat);
 			
 			// Response configuration
 			resp.setContentType("application/json");
@@ -152,7 +152,8 @@ public class LikeServlet extends HttpServlet {
 			// JSON Response
 			JSONObject jsonResponse = new JSONObject();
 			
-			jsonResponse.put("id", like.getId());
+			jsonResponse.put("id", chat.getId());
+			jsonResponse.put("accepted", chat.getAccepted());
 			
 			// String output		
 			out.print(jsonResponse.toString());
@@ -163,5 +164,5 @@ public class LikeServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

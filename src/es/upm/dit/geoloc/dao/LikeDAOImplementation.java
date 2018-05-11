@@ -2,8 +2,9 @@ package es.upm.dit.geoloc.dao;
 
 import org.hibernate.Session;
 
-import es.upm.dit.geoloc.dao.model.Like;
+import es.upm.dit.geoloc.dao.model.Likee;
 import es.upm.dit.geoloc.dao.model.Thought;
+import es.upm.dit.geoloc.dao.model.User;
 
 public class LikeDAOImplementation implements LikeDAO {
 	
@@ -15,13 +16,12 @@ public class LikeDAOImplementation implements LikeDAO {
 	}
 
 	@Override
-	public int createLike(Like like) {
+	public Likee createLike(Likee like) {
 		Session session = SessionFactoryService.get().openSession();
-		Integer likeId = null;
-		
 		try {
 			session.beginTransaction();
-			likeId = (Integer) session.save(like);
+			int id = (int) session.save(like);
+			like.setId(id);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: Manage Exceptions
@@ -29,16 +29,35 @@ public class LikeDAOImplementation implements LikeDAO {
 		} finally {
 			session.close();
 		}
-		return likeId;
+		return like;
 	}
 
 	@Override
-	public Like readLike(int id) {
-		Like like = null;
+	public Likee readLike(int id) {
+		Likee like = null;
 		Session session = SessionFactoryService.get().openSession();
 		try {
 			session.beginTransaction();
-			like = session.get(Like.class, id);
+			like = session.get(Likee.class, id);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: Manage Exceptions
+		} finally {
+			session.close();
+		}
+		return like;
+	}
+	
+	@Override
+	public Likee readLike(int thoughtId, int userId) {
+		Likee like = null;
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			like = (Likee) session.createQuery("SELECT l FROM Likee l WHERE l.thought_id= :thougthId AND l.user_id= :userId")
+					.setParameter("thoughtId", thoughtId)
+					.setParameter("userId", userId)
+					.uniqueResult();
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			// TODO: Manage Exceptions
@@ -49,7 +68,7 @@ public class LikeDAOImplementation implements LikeDAO {
 	}
 
 	@Override
-	public void deleteLike(Like like) {
+	public void deleteLike(Likee like) {
 		Session session = SessionFactoryService.get().openSession();
 		try {
 			session.beginTransaction();
