@@ -2,6 +2,7 @@ package es.upm.dit.geoloc.dao;
 
 import org.hibernate.Session;
 
+import es.upm.dit.geoloc.dao.model.Thought;
 import es.upm.dit.geoloc.dao.model.User;
 
 public class UserDAOImplementation implements UserDAO{
@@ -34,12 +35,15 @@ public class UserDAOImplementation implements UserDAO{
 	}
 
 	@Override
-	public User readUser(double id) {
+	public User readUser(long UserId) {
 		User user = null;
 		Session session = SessionFactoryService.get().openSession();
 		try {
 		            	session.beginTransaction();
-		            	user = session.get(User.class, id);
+		            	User usuario = (User) session.createQuery("select p from User p where p.UserId= :UserId")
+		        				.setParameter("UserId", UserId)
+		        				.uniqueResult();
+		            	user = usuario;
 		            	session.getTransaction().commit();
 		} catch (Exception e) {
 		            	// manejar excepciones

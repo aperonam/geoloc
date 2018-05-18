@@ -37,12 +37,15 @@ public class ThoughtDAOImplementation implements ThoughtDAO{
 	}
 
 	@Override
-	public Thought readThought(double id) {
+	public Thought readThought(int id) {
 		Thought thought = null;
 		Session session = SessionFactoryService.get().openSession();
 		try {
 		            	session.beginTransaction();
-		            	thought = session.get(Thought.class, id);
+		            	Thought pensamiento = (Thought) session.createQuery("select p from Thought p where p.id= :Id")
+		        				.setParameter("Id", id)
+		        				.uniqueResult();
+		            	thought = pensamiento;
 		            	session.getTransaction().commit();
 		} catch (Exception e) {
 		            	// manejar excepciones
@@ -193,5 +196,89 @@ public class ThoughtDAOImplementation implements ThoughtDAO{
 }
 		return ArrayThought;
 	}
+	
+	@Override
+	public void changeStatus(int id) {
+		Session session = SessionFactoryService.get().openSession();
+		try {
+		            	session.beginTransaction();
+		            	Query query = session.createQuery("update Thought set status = :status where id = :id");
+		    query.setParameter("id",id);
+		    query.setParameter("status",2);
+		    
+		    int result = query.executeUpdate();
+		    
+		    System.out.println(result);
+		    
+		            	session.getTransaction().commit();
+		} catch (Exception e) {
+		       System.out.println(e.getMessage());
+		} finally {
+		            	session.close();
+		}
+}
+	
+	@Override
+	public void changeStatus2(int id) {
+		Session session = SessionFactoryService.get().openSession();
+		try {
+		            	session.beginTransaction();
+		            	Query query = session.createQuery("update Thought set status = :status where id = :id");
+		    query.setParameter("id",id);
+		    query.setParameter("status",1);
+		    
+		    int result = query.executeUpdate();
+		    
+		    System.out.println(result);
+		    
+		            	session.getTransaction().commit();
+		} catch (Exception e) {
+		       System.out.println(e.getMessage());
+		} finally {
+		            	session.close();
+		}
+}
+	
+	@Override
+	public void changeLike(Thought thought) {
+		Session session = SessionFactoryService.get().openSession();
+		try {
+		            	session.beginTransaction();
+		            	Query query = session.createQuery("update Thought set likes = :likes where id = :id");
+		    query.setParameter("id",thought.getId());
+		    query.setParameter("likes",thought.getLikes()+1);
+		    
+		    int result = query.executeUpdate();
+		    
+		    System.out.println(result);
+		    
+		            	session.getTransaction().commit();
+		} catch (Exception e) {
+		       System.out.println(e.getMessage());
+		} finally {
+		            	session.close();
+		}
+}
 
+	@Override
+	public void changeDislike(Thought thought) {
+		Session session = SessionFactoryService.get().openSession();
+		try {
+		            	session.beginTransaction();
+		            	Query query = session.createQuery("update Thought set likes = :likes where id = :id");
+		    query.setParameter("id",thought.getId());
+		    query.setParameter("likes",thought.getLikes()-1);
+		    
+		    int result = query.executeUpdate();
+		    
+		    System.out.println(result);
+		    
+		            	session.getTransaction().commit();
+		} catch (Exception e) {
+		       System.out.println(e.getMessage());
+		} finally {
+		            	session.close();
+		}
+}
+	
 }
