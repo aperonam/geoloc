@@ -25,6 +25,21 @@
       </servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>Chat</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.ChatServlet
+      </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Mensaje</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.MensajeServlet
+      </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Status</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.StatusServlet
+      </servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>publicar</servlet-name>
     <servlet-class>es.upm.dit.geoloc.servlets.ThoughtServlet
       </servlet-class>
@@ -39,22 +54,66 @@
     <servlet-class>es.upm.dit.geoloc.servlets.FiltrarPopularesServlet
       </servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
+    <servlet-name>Delete</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.ChatDeleteServlet
+      </servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>filtrarMisMarcadores</servlet-name>
     <servlet-class>es.upm.dit.geoloc.servlets.FiltrarMisMarcadoresServlet
+  </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>NewMessage</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.NewMessageServlet
+  </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Like</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.LikeServlet
+  </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Dislike</servlet-name>
+    <servlet-class>es.upm.dit.geoloc.servlets.DislikeServlet
   </servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>signin</servlet-name>
     <url-pattern>/signin</url-pattern>
   </servlet-mapping>
-   <servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Like</servlet-name>
+    <url-pattern>/Like</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Dislike</servlet-name>
+    <url-pattern>/Dislike</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Delete</servlet-name>
+    <url-pattern>/Delete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>filtrarMisMarcadores</servlet-name>
     <url-pattern>/filtrarMisMarcadores</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>Chat</servlet-name>
+    <url-pattern>/Chat</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>update</servlet-name>
     <url-pattern>/update</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Status</servlet-name>
+    <url-pattern>/Status</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NewMessage</servlet-name>
+    <url-pattern>/NewMessage</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>publicar</servlet-name>
@@ -63,6 +122,10 @@
   <servlet-mapping>
     <servlet-name>filtrar</servlet-name>
     <url-pattern>/filtrar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Mensaje</servlet-name>
+    <url-pattern>/Mensaje</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>filtrarPopulares</servlet-name>
