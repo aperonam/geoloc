@@ -21,7 +21,7 @@
 }
 #actualizar{
     margin-left: 17px;
-    margin-top: 87px;
+    margin-top: 50px;
     border: none;
     background-color: transparent;
     outline: none;
@@ -82,11 +82,21 @@
     outline: none;
     margin-top: 23px;
 }
+#btnChat{
+	border: none;
+    background-color: transparent;
+    outline: none;
+    margin-top: 23px;
+}
 #imgLikes{
     height: 33px;
     width: 35px;
 }
 #btnLikes:hover{
+	cursor:pointer;
+}
+
+#btnChat:hover{
 	cursor:pointer;
 }
 #misMarkers{

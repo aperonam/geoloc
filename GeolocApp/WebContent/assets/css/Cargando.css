@@ -1,0 +1,129 @@
+#Cargando{
+    margin: 0 auto;
+    display: block;
+    left: 25%;
+    top: 35%;
+    position: absolute;
+    right: 25%;
+    width: 280px;
+    height: 265px;
+    bottom: 25%;
+}
+html {
+     height:100%;
+     width:100%;
+     
+}
+body {
+   background-image: url("../../assets/img/fondo.jpg");
+   background-size:100% 100%;
+   overflow: hidden;
+}
+body {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-justify-content: center;
+
+        -ms-flex-pack: center;
+
+            justify-content: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+#contenedor {
+    width: 25em;
+    height: 1em;
+    border: 2px solid #fff;
+    margin-top: 718px;
+}
+
+#barra {
+    width: 0;
+    height: 100%;
+
+    -webkit-animation: progreso 1.5s linear infinite;
+            animation: progreso 1.5s linear infinite;
+
+    background: #fff;
+}
+
+#texto {
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 2em;
+
+    width: 12.5em;
+    height: 100%;
+
+    text-align: center;
+
+    color: #fff;
+
+    mix-blend-mode: multiply;
+}
+
+#texto:after {
+    content: ;
+    -webkit-animation: porcentaje 5s linear infinite;
+            animation: porcentaje 5s linear infinite;
+}
+
+@-webkit-keyframes progreso {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes progreso {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@-webkit-keyframes porcentaje {
+    0% {
+        content:;
+    }
+    25% {
+        content:;
+    }
+    50% {
+        content: ;
+    }
+    75% {
+        content:;
+    }
+    100% {
+        content: ;
+    }
+}
+
+@keyframes porcentaje {
+    0% {
+        content:;
+    }
+    25% {
+        content: ;
+    }
+    50% {
+        content: ;
+    }
+    75% {
+        content: ;
+    }
+    100% {
+        content: ;
+    }
+}
+
+
