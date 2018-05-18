@@ -6,8 +6,10 @@
 <%
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
-	if(session.getAttribute("twitter")==null)
+	if(session.getAttribute("twitter")==null){
 		response.sendRedirect("login.jsp");
+		return;	
+	}
 %>
 <%
 List<String> ArrayThought = new ArrayList<String>();
@@ -26,14 +28,14 @@ List<String> ArrayThought = new ArrayList<String>();
 <link rel="stylesheet" type="text/css" href="./assets/css/texto.css">
 <link rel="stylesheet" type="text/css" href="./assets/css/enviar.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Publica</title>
 </head>
 <body>
 <div class="cabecera">
 <div id="divlogo"><img id="logoCab" src="./assets/img/LOGO.png" alt="logo"/></div>
 <div id="divbusca"><a href="Index.jsp"/><img id="busca" src="./assets/img/buscaLogo.png" alt="logoBusca"/></a></div>
 <div id="divpublica"><a href="Post.jsp"/><img id="publica" src="./assets/img/publica.png" alt="logoPublica"/></a></div>
-<div id="divchatea"><img id="chatea" src="./assets/img/chatea.png" alt="logoChatea"/></div>
+<div id="divchatea"><a href="Chat.jsp"/><img id="chatea" src="./assets/img/chatea.png" alt="logoChatea"/></div>
 <div id="divlogin"><section class="row1">  
  <div class="seccion">
   <div class="boton-linea-ext">
@@ -288,16 +290,6 @@ textArea.onblur = function () {
 };
 </script>
     <script type="text/javascript">
-    var lat = 0;
-    var lng = 0;
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          lat = position.coords.latitude;
-          lng = position.coords.longitude;
-        })
-   	 }
-    </script>
-    <script type="text/javascript">
     
     function sendAjax() {
 
@@ -307,8 +299,8 @@ textArea.onblur = function () {
     		}
     	
     	Json.pensamiento = x.value;
-    	Json.lat = lat;
-    	Json.lng = 	lng;
+    	Json.lat = localStorage.lat;
+    	Json.lng = localStorage.lng;
     	Json.likes = 0;
 		Json.tag1 = tagsJson[0];
 		Json.tag2 = tagsJson[1];

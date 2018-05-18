@@ -39,7 +39,7 @@
       <div class="modal-body">
       
 		<a href="signin" id="twtButton"><img id="twitter" src="./assets/img/twitter.png" alt="Twitter"/></a>
-		<p id="Condiciones">*Al iniciar sesión aceptas que la aplicación obtenga tu ubicación, así como tu identificación de usuario de twitter. Estos datos se mantendrán almacenados de forma segura y nunca serán expuestos sin su consentimiento.</p>
+		<img id="condiciones" src="./assets/img/condiciones.png" alt="condiciones"/>
       </div>
     </div>
   </div>
