@@ -49,6 +49,6 @@ public class CallbackServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        response.sendRedirect(request.getContextPath() + "/Index.jsp");
+        response.sendRedirect(request.getContextPath() + "/Loading.jsp");
     }
 }
