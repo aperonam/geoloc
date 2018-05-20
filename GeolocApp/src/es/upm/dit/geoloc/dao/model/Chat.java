@@ -23,8 +23,6 @@ public class Chat implements Serializable {
 	private int status;
 	private int ThoughtId;
 	
-	
-	
 	public Chat () {
 		
 	}
@@ -32,36 +30,30 @@ public class Chat implements Serializable {
 	public int getId() {
 		return id;
 	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public long getUserId1() {
 		return UserId1;
 	}
 
-
-
 	public void setUserId1(long userId1) {
 		UserId1 = userId1;
 	}
-
-
 
 	public long getUserId2() {
 		return UserId2;
 	}
 
-
-
 	public void setUserId2(long userId2) {
 		UserId2 = userId2;
 	}
 
-
-
 	public int getStatus() {
 		return status;
 	}
-
-
 
 	public void setStatus(int status) {
 		this.status = status;

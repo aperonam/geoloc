@@ -13,6 +13,13 @@ import es.upm.dit.geoloc.dao.model.Thought;
 import es.upm.dit.geoloc.dao.model.User;
 
 public class LikesDAOImplementation implements LikesDAO {
+	
+	private static LikesDAOImplementation instance;
+	public LikesDAOImplementation() {};
+	public static LikesDAOImplementation getInstance() {
+		if(null == instance) instance = new LikesDAOImplementation();
+		return instance;
+	}
 
 	@Override
 	public void createLikes(Likes likes) {
@@ -36,97 +43,105 @@ public class LikesDAOImplementation implements LikesDAO {
 	}
 
 	@Override
-	public Likes readLikes(int id, long UserId) {
-		Likes likes = null;
+	public Likes readLikes(int thoughtId, long userId) {
 		Session session = SessionFactoryService.get().openSession();
+		Likes likes = null;
 		try {
-		            	session.beginTransaction();
-		            	Likes l = (Likes) session.createQuery("select p from Likes p where p.ThoughtId= :ThoughtId and UserId= :UserId")
-		        				.setParameter("ThoughtId", id)
-		        				.setParameter("UserId", UserId)
-		        				.uniqueResult();
-		            	likes = l;
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			likes = (Likes) session.createQuery("select p from Likes p where p.ThoughtId= :ThoughtId and UserId= :UserId")
+				.setParameter("ThoughtId", thoughtId)
+				.setParameter("UserId", userId)
+				.uniqueResult();
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		            	// manejar excepciones
+			// manejar excepciones
 		} finally {
-		            	session.close();
+			session.close();
 		}
 		return likes;
 	}
 
-	@Override
-	public void updateChat(Likes likes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteChat(Likes likes) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public List<Likes> getMisLikes(long UserId) {
 		Session session = SessionFactoryService.get().openSession();
 		List<Likes> likes = new ArrayList<Likes>();
 		try {
-        	session.beginTransaction();
-        	List<Likes> l = session.createQuery("select p from Likes p where UserId= :UserId").setParameter("UserId",UserId ).list();
-        	likes = l;
-        	session.getTransaction().commit();
-} catch (Exception e) {
-        	e.getMessage();
-} finally {
-
-	session.close();
-}
+			session.beginTransaction();
+			likes.addAll(session.createQuery("select p from Likes p where UserId= :UserId").setParameter("UserId",UserId ).getResultList());
+	        	session.getTransaction().commit();
+		} catch (Exception e) {
+			e.getMessage();
+		} finally {
+			session.close();
+		}
 		return likes;
 	}
 
 	@Override
-	public void changeStatus(int id, long UserId) {
+	public void changeStatus(int thoughtId, long userId) {
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	Query query = session.createQuery("update Likes set status = :status where ThoughtId = :ThoughtId and UserId= :UserId");
-		    query.setParameter("ThoughtId",id);
-		    query.setParameter("UserId", UserId);
-		    query.setParameter("status",2);
-		    
-		    int result = query.executeUpdate();
-		    
-		    System.out.println(result);
-		    
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			session.createQuery("update Likes set status = :status where ThoughtId = :ThoughtId and UserId= :UserId")
+				.setParameter("ThoughtId", thoughtId)
+				.setParameter("UserId", userId)
+				.setParameter("status", 2)
+				.executeUpdate();
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		       System.out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		} finally {
-		            	session.close();
+			session.close();
 		}
-}
+	}
 	
 	@Override
-	public void changeStatus2(int id, long UserId) {
+	public void changeStatus2(int thoughtId, long userId) {
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	Query query = session.createQuery("update Likes set status = :status where ThoughtId = :ThoughtId and UserId= :UserId");
-		    query.setParameter("ThoughtId",id);
-		    query.setParameter("UserId", UserId);
-		    query.setParameter("status",1);
-		    
-		    int result = query.executeUpdate();
-		    
-		    System.out.println(result);
-		    
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			session.createQuery("update Likes set status = :status where ThoughtId = :ThoughtId and UserId= :UserId")
+				.setParameter("ThoughtId", thoughtId)
+				.setParameter("UserId", userId)
+				.setParameter("status", 1)
+				.executeUpdate();
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		       System.out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		} finally {
-		            	session.close();
+			session.close();
 		}
-}
+	}
+	
+	@Override
+	public void delete(Likes like) {
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			session.delete(like);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			session.close();
+		}
+	}
+	
+	@Override
+	public Likes read(int id) {
+		Session session = SessionFactoryService.get().openSession();
+		Likes like = null;
+		try {
+			session.beginTransaction();
+			like = (Likes) session.find(Likes.class, id);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			session.close();
+		}
+		return like;
+	}
 
 }

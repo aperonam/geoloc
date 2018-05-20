@@ -11,27 +11,32 @@ import es.upm.dit.geoloc.dao.model.Chat;
 import es.upm.dit.geoloc.dao.model.Thought;
 
 
-
-
-public class ChatDAOImplementation implements ChatDAO{
+public class ChatDAOImplementation implements ChatDAO {
+	
+	private static ChatDAOImplementation instance;
+	public ChatDAOImplementation() {};
+	public static ChatDAOImplementation getInstance() {
+		if(null == instance) instance = new ChatDAOImplementation();
+		return instance;
+	}
 
 	@Override
 	public void createChat(Chat chat) {
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	Chat c = (Chat) session.createQuery("select p from Chat p where p.ThoughtId= :ThoughtId")
-		        				.setParameter("ThoughtId",chat.getThoughtId())
-		        				.uniqueResult();
-		            	
-		            	if(c == null) {
-		            	session.save(chat);
-		            	session.getTransaction().commit();
-		            	}
+			session.beginTransaction();
+			Chat c = (Chat) session.createQuery("select p from Chat p where p.ThoughtId= :ThoughtId")
+				.setParameter("ThoughtId",chat.getThoughtId())
+				.uniqueResult();
+			
+			if (c == null) {
+				session.save(chat);
+				session.getTransaction().commit();
+			}
 		} catch (Exception e) {
-		            	// manejar excepciones
+			// manejar excepciones
 		} finally {
-		            	session.close();
+			session.close();
 		}
 		
 	}
@@ -41,38 +46,46 @@ public class ChatDAOImplementation implements ChatDAO{
 		Chat chat = null;
 		Session session = SessionFactoryService.get().openSession();
 		try {
-		            	session.beginTransaction();
-		            	Chat xat = (Chat) session.createQuery("select p from Chat p where p.id= :id")
-		        				.setParameter("id", id)
-		        				.uniqueResult();
-		            	chat = xat;
-		            	session.getTransaction().commit();
+			session.beginTransaction();
+			Chat xat = (Chat) session.createQuery("select p from Chat p where p.id= :id")
+				.setParameter("id", id)
+				.uniqueResult();
+			chat = xat;
+			session.getTransaction().commit();
 		} catch (Exception e) {
-		            	// manejar excepciones
+			// manejar excepciones
 		} finally {
-		            	session.close();
+			session.close();
 		}
 		return chat;
 	}
 
 	@Override
 	public void updateChat(Chat chat) {
-		// TODO Auto-generated method stub
-		
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(chat);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public void deleteChat(Chat chat) {
 		Session session = SessionFactoryService.get().openSession();
 		try {
-        	session.beginTransaction();
-        	session.delete(chat);
-        	session.getTransaction().commit();
-} catch (Exception e) {
-        	// manejar excepciones
-} finally {
-        	session.close();
-}		
+			session.beginTransaction();
+			session.delete(chat);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			session.close();
+		}
 	}
 	
 	@Override
@@ -80,16 +93,14 @@ public class ChatDAOImplementation implements ChatDAO{
 		Session session = SessionFactoryService.get().openSession();
 		List<Chat> chats = new ArrayList<Chat>();
 		try {
-        	session.beginTransaction();
-        	List<Chat> chat = session.createQuery("select p from Chat p where UserId1= :UserId1 or UserId2= :UserId2").setParameter("UserId1",UserId ).setParameter("UserId2", UserId).list();
-        	chats = chat;
-        	session.getTransaction().commit();
-} catch (Exception e) {
-        	e.getMessage();
-} finally {
-
-	session.close();
-}
+			session.beginTransaction();
+			chats.addAll(session.createQuery("select p from Chat p where UserId1= :UserId1 or UserId2= :UserId2").setParameter("UserId1",UserId ).setParameter("UserId2", UserId).getResultList());
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.getMessage();
+		} finally {
+			session.close();
+		}
 		return chats;
 	}
 	
@@ -98,16 +109,15 @@ public class ChatDAOImplementation implements ChatDAO{
 		Session session = SessionFactoryService.get().openSession();
 		int status = 0;
 		try {
-        	session.beginTransaction();
-        	Chat chat = (Chat) session.createQuery("select p from Chat p where ChatId= :ChatId").setParameter("ChatId",ChatId ).uniqueResult();
-        	status = chat.getStatus();
-        	session.getTransaction().commit();
-} catch (Exception e) {
-        	e.getMessage();
-} finally {
-
-	session.close();
-}
+			session.beginTransaction();
+			Chat chat = (Chat) session.createQuery("select p from Chat p where ChatId= :ChatId").setParameter("ChatId",ChatId ).uniqueResult();
+			status = chat.getStatus();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.getMessage();
+		} finally {
+			session.close();
+		}
 		return status;
 	}
 
@@ -130,6 +140,23 @@ public class ChatDAOImplementation implements ChatDAO{
 		} finally {
 		            	session.close();
 		}
-}
+	}
+	
+	
+	@Override
+	public Chat create(Chat chat) {
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			int id = (int) session.save(chat);
+			chat.setId(id);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			session.close();
+		}
+		return chat;
+	}
 
 }

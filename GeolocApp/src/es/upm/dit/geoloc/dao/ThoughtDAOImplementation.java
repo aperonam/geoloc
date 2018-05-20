@@ -197,47 +197,8 @@ public class ThoughtDAOImplementation implements ThoughtDAO{
 		return ArrayThought;
 	}
 	
-	@Override
-	public void changeStatus(int id) {
-		Session session = SessionFactoryService.get().openSession();
-		try {
-		            	session.beginTransaction();
-		            	Query query = session.createQuery("update Thought set status = :status where id = :id");
-		    query.setParameter("id",id);
-		    query.setParameter("status",2);
-		    
-		    int result = query.executeUpdate();
-		    
-		    System.out.println(result);
-		    
-		            	session.getTransaction().commit();
-		} catch (Exception e) {
-		       System.out.println(e.getMessage());
-		} finally {
-		            	session.close();
-		}
-}
-	
-	@Override
-	public void changeStatus2(int id) {
-		Session session = SessionFactoryService.get().openSession();
-		try {
-		            	session.beginTransaction();
-		            	Query query = session.createQuery("update Thought set status = :status where id = :id");
-		    query.setParameter("id",id);
-		    query.setParameter("status",1);
-		    
-		    int result = query.executeUpdate();
-		    
-		    System.out.println(result);
-		    
-		            	session.getTransaction().commit();
-		} catch (Exception e) {
-		       System.out.println(e.getMessage());
-		} finally {
-		            	session.close();
-		}
-}
+
+
 	
 	@Override
 	public void changeLike(Thought thought) {

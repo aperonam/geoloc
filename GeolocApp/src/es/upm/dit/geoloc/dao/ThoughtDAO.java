@@ -16,8 +16,6 @@ public interface ThoughtDAO {
 	public List<Thought> getTagsPopulares(String tag);
 	public List<Thought> getMisMarcadores(long UserId);
 	public List<Thought> getTagsMisMarcadores(String tag, long UserId);
-	void changeStatus(int id);
-	void changeStatus2(int id);
 	void changeDislike(Thought thought);
 	void changeLike(Thought thought);
 }
